@@ -1,0 +1,5 @@
+#!/usr/local/bin/ruby
+require "rubygems"
+require "vegas"
+require File.join(File.dirname(__FILE__), "..", "lib", "nitgit")
+Vegas::Runner.new(NitGit, "Nitgit - Git Commit Browser")
