@@ -10,6 +10,10 @@ require "sinatra"
 # require 'nitgit/grit_extensions'
 
 class NitGit < Sinatra::Base
+  set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
+  
+  enable :static
+  
   enable :logging
   def logger; Vegas::Runner.logger; end
   
@@ -21,6 +25,7 @@ class NitGit < Sinatra::Base
   end
   
   get "/" do
-    repo.heads.map { |x| x.name }.join("\n")
+    @heads = repo.heads.map { |x| x.name }.join("\n")
+    haml :index
   end
 end
