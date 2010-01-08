@@ -11,9 +11,16 @@ require "sinatra"
 
 class NitGit < Sinatra::Base
   enable :logging
+  def logger; Vegas::Runner.logger; end
+  
   set :server, "mongrel"
   
+  def repo
+    logger.info "attempting to load repo at #{self.class.pwd.inspect}"
+    @repo ||= Grit::Repo.new(self.class.pwd)
+  end
+  
   get "/" do
-    "hi"
+    repo.heads.map { |x| x.name }.join("\n")
   end
 end
