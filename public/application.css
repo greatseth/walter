@@ -31,7 +31,7 @@ a img {border: 0}
 
 #commits {
   width: 30%;
-  margin-right: 2%;
+  margin-right: 1%;
   padding-right: 1%;
   float: left;
   border-right: 1px solid #eee;
@@ -61,11 +61,23 @@ a img {border: 0}
 }
 
 #diffs {
-  width: 66%;
+  width: 67%;
   float: left;
-  margin: .5em 0 0 0;
   font-family: Courier;
 }
+
+#diffs .diff pre {
+  padding: .1em .3em;
+}
+
+#diffs .overview {
+  color: white;
+  background: #666;
+  font-weight: bold;
+}
+
+#diffs .add    {background: #CDE080}
+#diffs .remove {background: #FFA3A8}
 
 #content + * {
   clear: both;

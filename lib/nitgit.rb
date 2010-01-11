@@ -39,6 +39,7 @@ class NitGit < Sinatra::Base
   NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
   $: << NITGIT_LIB_DIR
   
+  require "nitgit/string_extensions"
   require "nitgit/grit_extensions"
   
   ###

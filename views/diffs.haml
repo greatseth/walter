@@ -1,8 +1,15 @@
 - @commit.diffs.each do |d|
   - d.diff.split("\n").each do |line|
     .diff
-      - if line =~ /^(\-|\+){3}/
-        %strong{ :style => "color:white" }
+      - if line.diff_overview_line?
+        %pre{ :class => "overview" }
+          = Iconv.conv("UTF-8", "LATIN1", line)
+      - elsif line.diff_add_line?
+        %pre{ :class => "add" }
+          = Iconv.conv("UTF-8", "LATIN1", line)
+      - elsif line.diff_remove_line?
+        %pre{ :class => "remove" }
           = Iconv.conv("UTF-8", "LATIN1", line)
       - else
-        = Iconv.conv("UTF-8", "LATIN1", line)
+        %pre
+          = Iconv.conv("UTF-8", "LATIN1", line)
