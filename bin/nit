@@ -1,5 +1,8 @@
 #!/usr/local/bin/ruby
+
+# ARGV.concat %w( -L )
+
 require "rubygems"
 require "vegas"
-require File.join(File.dirname(__FILE__), "..", "lib", "nitgit")
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "nitgit"))
 Vegas::Runner.new NitGit, "Nitgit - Git Commit Browser", :pwd => Dir.pwd
