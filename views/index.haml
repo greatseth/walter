@@ -1,2 +1,12 @@
-- @heads.each do |h|
-  = h
+%ol#commits
+  -@commits.each do |c|
+    %li{ :id => "commit_#{c.id}" }
+      %img{ :src => c.author.gravatar_url(36) }
+      %p
+        = c.message
+      %p
+        %a{ :href => "mailto:#{c.author}" }
+          = c.author
+
+#diffs
+  %p Select a commit to view the changes.

@@ -1,0 +1,48 @@
+* {margin: 0; padding: 0;}
+
+ol,ul {list-style: none;}
+
+body {
+  font-family: sans-serif;
+  padding: 1em;
+  color: #000;
+}
+
+#logo {
+  font-size: 2em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1em;
+}
+
+#header {
+  background: #eee;
+  padding: 1em 2em;
+  margin: 0 0 .5em 0;
+}
+
+#content {
+  padding: .5em 2em;
+  margin: 1em 0;
+}
+
+#commits {
+  width: 33%;
+  float: left;
+}
+
+#commits li {
+  border-bottom: 1px solid #ccc;
+  padding: .5em 0;
+}
+
+#diffs {
+  width: 66%;
+  float: left;
+}
+
+#footer {
+  clear: both;
+  background: #eee;
+  padding: .5em 2em;
+}
