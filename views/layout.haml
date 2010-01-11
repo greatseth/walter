@@ -8,9 +8,14 @@
     %script{ :src => "/jquery-ui-1.7.2.custom/js/jquery-1.3.2.min.js" }
     %script{ :src => "/jquery-ui-1.7.2.custom/js/jquery-ui-1.7.2.custom.min.js" }
   %body
-    #header.ui-corner-all
-      #logo NitGit
-    #content
+    #header
+      .container
+        %p#logo NitGit
+    #content.ui-helper-clearfix
       =yield
     #footer
-      %p sup
+      .container
+        %p
+          &copy; 2010
+          %a{ :href => "http://greatseth.com" }
+            Seth Thomas Rasmussen

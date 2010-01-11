@@ -1,12 +1,11 @@
 %ol#commits
   -@commits.each do |c|
-    %li{ :id => "commit_#{c.id}" }
-      %img{ :src => c.author.gravatar_url(36) }
-      %p
-        = c.message
-      %p
+    %li{ :id => "commit_#{c.id}", :class => "ui-helper-clearfix" }
+      .img
         %a{ :href => "mailto:#{c.author}" }
-          = c.author
+          %img{ :src => c.author.gravatar_url(36) }
+      %p.message
+        = c.message.sub("\n\n", "<br /><br />").gsub("\n-", "<br />-")
 
 #diffs
   %p Select a commit to view the changes.

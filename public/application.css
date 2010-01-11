@@ -3,46 +3,87 @@
 ol,ul {list-style: none;}
 
 body {
+  padding: 4em 1em 2em 1em;
+  
   font-family: sans-serif;
-  padding: 1em;
   color: #000;
 }
+
+a img {border: 0}
 
 #logo {
   font-size: 2em;
   text-transform: uppercase;
-  margin: 0;
-  line-height: 1em;
+  margin: 0.2em 0 0 0;
 }
 
 #header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  
   background: #eee;
-  padding: 1em 2em;
-  margin: 0 0 .5em 0;
 }
 
 #content {
-  padding: .5em 2em;
-  margin: 1em 0;
+  padding: .5em 1em;
 }
 
 #commits {
-  width: 33%;
+  width: 30%;
+  margin-right: 2%;
+  padding-right: 1%;
   float: left;
+  border-right: 1px solid #eee;
 }
 
 #commits li {
-  border-bottom: 1px solid #ccc;
-  padding: .5em 0;
+  border-bottom: 1px solid #eee;
+  padding: 1em 0 .5em 0;
+}
+
+#commits li:last-child {
+  border: none;
+}
+
+#commits li .img {
+  float: left;
+  margin: 0 0.5em 0.3em 0;
+  border: 1px solid #444;
+  width: 36px;
+  height: 36px;
+}
+
+#commits li .message {
+  font-family: Courier;
+  font-size: .7em;
+  margin-left: 48px;
 }
 
 #diffs {
   width: 66%;
   float: left;
+  margin: .5em 0 0 0;
+}
+
+#content + * {
+  clear: both;
 }
 
 #footer {
-  clear: both;
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  
   background: #eee;
-  padding: .5em 2em;
+  font-size: .7em;
+}
+
+.container {
+  margin: 1em;
+  padding: 0 1em;
+}
+
+#footer p {
+  text-align: right;
 }
