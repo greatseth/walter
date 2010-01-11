@@ -1,3 +1,4 @@
+require "iconv"
 require "rack/reloader"
 require "sinatra"
 
@@ -24,6 +25,8 @@ end
 
 
 class NitGit < Sinatra::Base
+  set :environment, :development
+  
   configure :development do
     use Sinatra::Reloader
   end
@@ -70,5 +73,11 @@ class NitGit < Sinatra::Base
     @branches = repo.branches.map { |b| b.name }
     @commits = commits_for_page
     haml :index
+  end
+  
+  get "/diffs/:sha" do |sha|
+    @sha    = sha
+    @commit = repo.commit(@sha)
+    haml :diffs, :layout => false
   end
 end

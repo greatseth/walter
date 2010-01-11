@@ -1,0 +1,8 @@
+- @commit.diffs.each do |d|
+  - d.diff.split("\n").each do |line|
+    .diff
+      - if line =~ /^(\-|\+){3}/
+        %strong{ :style => "color:white" }
+          = Iconv.conv("UTF-8", "LATIN1", line)
+      - else
+        = Iconv.conv("UTF-8", "LATIN1", line)
