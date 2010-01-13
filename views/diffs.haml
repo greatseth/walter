@@ -3,15 +3,15 @@
     .diff
       - if line.diff_overview_line?
         %pre{ :class => "overview" }
-          = Iconv.conv("UTF-8", "LATIN1", line)
+          = line.utf8
       - elsif line.diff_add_line?
         %pre{ :class => "add" }
-          = Iconv.conv("UTF-8", "LATIN1", line)
+          = line.utf8
       - elsif line.diff_remove_line?
         %pre{ :class => "remove" }
-          = Iconv.conv("UTF-8", "LATIN1", line)
+          = line.utf8
       - elsif line.strip.empty?
         %pre &nbsp;
       - else
         %pre
-          = Iconv.conv("UTF-8", "LATIN1", line)
+          = line.utf8

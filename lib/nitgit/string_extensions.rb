@@ -1,4 +1,9 @@
 class String
+  def utf8
+    require "iconv"
+    Iconv.conv("UTF-8", "LATIN1", self)
+  end
+  
   def diff_change_line?
     match /^(\-|\+){1,2}/
   end
