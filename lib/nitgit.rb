@@ -1,4 +1,3 @@
-require "iconv"
 require "rack/reloader"
 require "sinatra"
 
