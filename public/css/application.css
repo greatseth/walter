@@ -73,6 +73,15 @@ a img {border: 0}
   margin-left: 48px;
 }
 
+#select_a_commit {
+  position: fixed;
+  top: 50%; right: 0;
+  width: 67%;
+  text-align: center;
+  font-size: 2em;
+  color: #ccc;
+}
+
 #diffs {
   width: 67%;
   float: left;
