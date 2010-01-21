@@ -25,6 +25,19 @@ a img {border: 0}
   background: #eee;
 }
 
+#controls {
+  position: absolute;
+  top: 50%; right: 1em;
+  margin-top: -1em;
+  width: 400px;
+  text-align: right;
+}
+
+#controls label,
+#controls select {
+  margin-left: .5em;
+}
+
 #content {
   padding: .5em 1em;
 }
