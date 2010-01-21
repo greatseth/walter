@@ -14,6 +14,14 @@
     #header
       .container
         %p#logo NitGit
+        #controls
+          %label{ :for => "hide_merges" }
+            %input{ :type => "checkbox", :id => "hide_merges", :name => "hide_merges" }
+            Hide merges?
+          %select{ :id => "select_branch" }
+            - @repo.heads.each do |h|
+              %option{ :value => h.name }
+                = h.name
     #content.ui-helper-clearfix
       = yield
     #footer
