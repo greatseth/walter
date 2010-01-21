@@ -14,9 +14,13 @@
     #header
       .container
         %p#logo NitGit
+        %p#credit
+          &copy; 2010
+          %a{ :href => "http://greatseth.com" }
+            Seth Thomas Rasmussen
         #controls
           %label{ :for => "hide_merges" }
-            %input{ :type => "checkbox", :id => "hide_merges", :name => "hide_merges" }
+            %input{ :type => "checkbox", :id => "hide_merges" }
             Hide merges?
           %select{ :id => "select_branch" }
             - @repo.heads.each do |h|
@@ -24,9 +28,3 @@
                 = h.name
     #content.ui-helper-clearfix
       = yield
-    #footer
-      .container
-        %p
-          &copy; 2010
-          %a{ :href => "http://greatseth.com" }
-            Seth Thomas Rasmussen
