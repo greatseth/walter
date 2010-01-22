@@ -1,5 +1,6 @@
 - @commit.diffs.each do |d|
-  - `pygmentize -f html -O nowrap #{File.expand_path(File.join(File.dirname(d.repo.path), d.a_path))}`.split("\n").each do |line|
+  -# `pygmentize -f html -O nowrap #{File.expand_path(File.join(File.dirname(d.repo.path), d.a_path))}`.split("\n").each do |line|
+  - d.diff.each do |line|
     .diff
       - if line.diff_overview_line?
         %pre{ :class => "overview" }
