@@ -23,4 +23,8 @@ class String
   def diff_overview_line?
     self =~ /^(\-|\+){3}/
   end
+  
+  def highlight(lexer)
+    Albino.new(self, lexer)
+  end
 end

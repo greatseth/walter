@@ -1,5 +1,5 @@
 - @commit.diffs.each do |d|
-  -# `pygmentize -f html -O nowrap #{File.expand_path(File.join(File.dirname(d.repo.path), d.a_path))}`.split("\n").each do |line|
+  - lexer = `pygmentize -N #{d.a_path}`.strip
   - d.diff.each do |line|
     .diff
       - if line.diff_overview_line?
@@ -7,12 +7,12 @@
           = line.utf8
       - elsif line.diff_add_line?
         %pre{ :class => "add" }
-          = line.utf8
+          = line.utf8.highlight(lexer)
       - elsif line.diff_remove_line?
         %pre{ :class => "remove" }
-          = line.utf8
+          = line.utf8.highlight(lexer)
       - elsif line.strip.empty?
         %pre &nbsp;
       - else
         %pre
-          = line.utf8
+          = line.utf8.highlight(lexer)
