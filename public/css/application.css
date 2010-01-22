@@ -11,12 +11,6 @@ body {
 
 a img {border: 0}
 
-#logo {
-  font-size: 2em;
-  text-transform: uppercase;
-  margin: 0.2em 0 0 0;
-}
-
 #header {
   position: fixed;
   top: 0; left: 0;
@@ -24,6 +18,23 @@ a img {border: 0}
   
   background: #eee;
 }
+
+#logo {
+  font-size: 2em;
+  text-transform: uppercase;
+  margin: 0.2em 0 0 0;
+}
+
+#credit {
+  font-size: .6em;
+  margin: .2em 0 0 0;
+}
+
+#credit,
+#credit a {color: #999}
+
+#header:hover #credit,
+#header:hover #credit a {color: inherit}
 
 #controls {
   position: absolute;
@@ -73,6 +84,15 @@ a img {border: 0}
   margin-left: 48px;
 }
 
+#select_a_commit {
+  position: fixed;
+  top: 50%; right: 0;
+  width: 67%;
+  text-align: center;
+  font-size: 2em;
+  color: #ccc;
+}
+
 #diffs {
   width: 67%;
   float: left;
@@ -94,15 +114,6 @@ a img {border: 0}
 
 #content + * {
   clear: both;
-}
-
-#footer {
-  position: fixed;
-  bottom: 0; left: 0;
-  width: 100%;
-  
-  background: #eee;
-  font-size: .7em;
 }
 
 .container {
