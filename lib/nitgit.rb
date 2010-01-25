@@ -32,13 +32,11 @@ class NitGit < Sinatra::Base
   
   ###
   
-  require "grit"
   require "haml"
   
   NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
   $: << NITGIT_LIB_DIR
   
-  require "albino"
   require "nitgit/string_extensions"
   require "nitgit/grit_extensions"
   
@@ -55,6 +53,7 @@ class NitGit < Sinatra::Base
   
   def repo
     logger.info "attempting to load repo at #{self.class.pwd.inspect}"
+    require "grit"
     @repo ||= Grit::Repo.new(self.class.pwd)
   end
   
