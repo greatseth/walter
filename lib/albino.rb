@@ -56,14 +56,18 @@ class Albino
 
   def initialize(target, lexer = :text, format = :html)
     @target  = File.exists?(target) ? File.read(target) : target rescue target
-    @options = { :l => lexer, :f => format }
+    @options = { :l => lexer, :f => format, :O => "nowrap" }
   end
 
   def execute(command)
+    Vegas::Runner.logger.info "executing pygmentize: #{command}"
     pid, stdin, stdout, stderr = Open4.popen4(command)
     stdin.puts @target
     stdin.close
-    stdout.read.strip
+    output = stdout.read.strip
+    stdout.close
+    stderr.close
+    output
   end
 
   def colorize(options = {})
