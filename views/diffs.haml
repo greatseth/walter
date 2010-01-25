@@ -1,18 +1,15 @@
 - @commit.diffs.each do |d|
   - lexer = `pygmentize -N #{d.a_path}`.strip
-  - d.diff.each do |line|
-    .diff
-      - if line.diff_overview_line?
-        %pre{ :class => "overview" }
-          = line.utf8
-      - elsif line.diff_add_line?
-        %pre{ :class => "add" }
-          = line.utf8.highlight(lexer)
-      - elsif line.diff_remove_line?
-        %pre{ :class => "remove" }
-          = line.utf8.highlight(lexer)
+  - highlighted_diff = d.diff.utf8.highlight(lexer).to_s
+  - highlighted_diff.each do |line|
+    - klass = line.diff_container_class
+    .diff_conatiner{ :class => klass }
+      - if line.diff_special_line?
+        .diff{ :class => klass }
+          = line
       - elsif line.strip.empty?
-        %pre &nbsp;
+        .diff
+          &nbsp;
       - else
-        %pre
-          = line.utf8.highlight(lexer)
+        .diff
+          = line

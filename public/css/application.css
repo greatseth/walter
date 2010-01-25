@@ -3,10 +3,16 @@
 ol,ul {list-style: none;}
 
 body {
-  padding: 4em 1em 2em 1em;
+  padding: 5em 1em 2em 1em;
   
   font-family: sans-serif;
+  font-size: 1em;
+  line-height: 1.4em;
   color: #000;
+}
+
+p {
+  line-height: 1em;
 }
 
 a img {border: 0}
@@ -84,33 +90,48 @@ a img {border: 0}
   margin-left: 48px;
 }
 
+#select_a_commit,
+#diffs {
+  width: 67.5%;
+}
+
 #select_a_commit {
   position: fixed;
   top: 50%; right: 0;
-  width: 67%;
   text-align: center;
   font-size: 2em;
   color: #ccc;
 }
 
 #diffs {
-  width: 67%;
   float: left;
   font-family: Courier;
+  font-size: .8em;
 }
 
-#diffs .diff pre {
-  padding: .1em .3em;
+#diffs .diff {
+  white-space: pre;
 }
 
-#diffs .overview {
-  color: white;
+#diffs .diff_container,
+#diffs .diff {
+  line-height: .4em;
+}
+
+#diffs .overview,
+#diffs .overview span {
+  color: #fff;
   background: #666;
   font-weight: bold;
 }
 
-#diffs .add    {background: #CDE080}
-#diffs .remove {background: #FFA3A8}
+#diffs .overview {margin-top: 1em}
+#diffs .overview:first-child,
+#diffs .overview + .overview,
+#diffs .overview + .overview .overview {margin-top: 0}
+
+#diffs .diff_container.add    {background: #CDE080}
+#diffs .diff_container.remove {background: #FFA3A8}
 
 #content + * {
   clear: both;
