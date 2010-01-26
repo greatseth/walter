@@ -76,6 +76,10 @@ a img {border: 0}
   padding: 1em 0 .5em 0;
 }
 
+#commits li.selected {
+  font-weight: bold;
+}
+
 #commits li:last-child {
   border: none;
 }

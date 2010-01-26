@@ -10,6 +10,8 @@ var RepoManager = {
   
   get_diff: function() {
     var c    = $(this)
+    $("#commits li.selected").removeClass("selected")
+    c.addClass("selected")
     var sha  = /[^_]+$/.exec(c.attr("id"))[0]
     $.get("/diffs/" + sha, function(data) { $("#diffs").html(data) })
     document.location.hash = sha
