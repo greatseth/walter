@@ -3,7 +3,7 @@
 ol,ul {list-style: none;}
 
 body {
-  padding: 5em 1em 2em 1em;
+  padding: 5em 0em 2em 1em;
   
   font-family: sans-serif;
   font-size: 1em;
@@ -130,8 +130,8 @@ a img {border: 0}
 #diffs .overview + .overview,
 #diffs .overview + .overview .overview {margin-top: 0}
 
-#diffs .add    {background: #CDE080}
-#diffs .remove {background: #FFA3A8}
+#diffs .add    {background: #ECF8D2}
+#diffs .remove {background: #FAEBEB}
 
 #content + * {
   clear: both;
