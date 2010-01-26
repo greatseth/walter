@@ -55,6 +55,11 @@ a img {border: 0}
   margin-left: .5em;
 }
 
+#spinner {
+  position: fixed;
+  top: 5.5em; left: .5em;
+}
+
 #content {
   padding: .5em 1em;
 }

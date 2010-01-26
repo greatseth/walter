@@ -1,3 +1,8 @@
+$.ajaxSetup({
+  beforeSend: function() { $("#spinner").show() },
+  complete:   function() { $("#spinner").hide() }
+})
+
 $(function() {
   $("#commits li").click(function() {
     var c    = $(this)
