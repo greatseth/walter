@@ -4,8 +4,10 @@ class String
     Iconv.conv("UTF-8", "LATIN1", self)
   end
   
+  LEADING_LINE_JUNK = /\s*(?:<span.*?>)?\s*/
+  
   def diff_change_line?
-    match /^(<span.*?>)?(\-|\+){1,2}/
+    match /^#{LEADING_LINE_JUNK}(\-|\+){1,2}/
   end
   
   def diff_add_line?
@@ -21,7 +23,7 @@ class String
   end
   
   def diff_overview_line?
-    self =~ /^(<span.*?>)?(\-|\+){3}/
+    self =~ /^#{LEADING_LINE_JUNK}(\-|\+){3}/
   end
   
   def diff_special_line?

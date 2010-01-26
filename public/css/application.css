@@ -130,8 +130,8 @@ a img {border: 0}
 #diffs .overview + .overview,
 #diffs .overview + .overview .overview {margin-top: 0}
 
-#diffs .diff_container.add    {background: #CDE080}
-#diffs .diff_container.remove {background: #FFA3A8}
+#diffs .add    {background: #CDE080}
+#diffs .remove {background: #FFA3A8}
 
 #content + * {
   clear: both;
