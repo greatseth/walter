@@ -6,6 +6,7 @@ $(function() {
       $("#diffs").html(data)
     })
     document.location.hash = sha
+    $("#sha").html(sha)
   })
   
   if (document.location.hash) {
