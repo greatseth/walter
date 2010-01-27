@@ -11,7 +11,7 @@ var RepoManager = {
   },
   
   get_diff: function() {
-    $("#diffs").html("<p class='diff_loading'>loading...</p>")
+    $("#diffs").html('<p class="diff_loading">loading...</p>')
     var c = $(this)
     $("#commits li.selected").removeClass("selected")
     c.addClass("selected")
