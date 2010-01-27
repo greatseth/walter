@@ -137,7 +137,13 @@ p {
   float: left;
   font-family: Courier;
   font-size: .8em;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+#diffs.hiding_overflow {
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 #diffs .diff {
