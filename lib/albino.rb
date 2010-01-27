@@ -58,15 +58,16 @@ class Albino
     @target  = File.exists?(target) ? File.read(target) : target rescue target
     @options = { :l => lexer, :f => format, :O => "nowrap" }
   end
-
+  
   def execute(command)
-    Vegas::Runner.logger.info "executing pygmentize: #{command}"
-    pid, stdin, stdout, stderr = Open4.popen4(command)
-    stdin.puts @target
-    stdin.close
-    output = stdout.read.strip
-    stdout.close
-    stderr.close
+    Vegas::Runner.logger.info command
+    output = ""
+    Open4.popen4(command) do |pid, stdin, stdout, stderr|
+      stdin.puts @target
+      stdin.close
+      output = stdout.read.strip
+      [stdout, stderr].each { |io| io.close }
+    end
     output
   end
 
