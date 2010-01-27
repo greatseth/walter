@@ -18,7 +18,7 @@
           %span /
           %select{ :id => "select_branch" }
             - @repo.heads.each do |h|
-              %option{ :value => h.name }
+              %option{ :value => h.name, :selected => (@selected_branch == h.name) }
                 = h.name
           %span /
           %span#sha
