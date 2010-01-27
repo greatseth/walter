@@ -4,9 +4,9 @@
       .img
         %a{ :href => "mailto:#{c.author}" }
           %img{ :src => c.author.gravatar_url(36) }
-      %p.message
+      %a{ :href => "##{c.id}", :class => "message" }
         = c.message.sub("\n\n", "<br /><br />").gsub("\n-", "<br />-")
 
 #diffs
-  %p#select_a_commit
+  %p.diff_loading
     Select a commit to view the changes.

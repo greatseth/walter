@@ -13,8 +13,13 @@
   %body
     #header
       .container
-        %p#logo
+        #logo
           NitGit / 
+          %select{ :id => "select_branch" }
+            - @repo.heads.each do |h|
+              %option{ :value => h.name }
+                = h.name
+          %span /
           %span#sha
         %p#credit
           &copy; 2010
@@ -24,9 +29,5 @@
           %label{ :for => "hide_merges" }
             %input{ :type => "checkbox", :id => "hide_merges" }
             Hide merges?
-          %select{ :id => "select_branch" }
-            - @repo.heads.each do |h|
-              %option{ :value => h.name }
-                = h.name
     #content.ui-helper-clearfix
       = yield

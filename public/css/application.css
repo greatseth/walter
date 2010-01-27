@@ -1,9 +1,9 @@
 * {margin: 0; padding: 0;}
-
-ol,ul {list-style: none;}
+a img {border: 0}
+ol, ul {list-style: none}
 
 body {
-  padding: 5em 0em 2em 1em;
+  padding: 4.2em 0 0 0;
   
   font-family: sans-serif;
   font-size: 1em;
@@ -15,20 +15,26 @@ p {
   line-height: 1em;
 }
 
-a img {border: 0}
-
 #header {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   
   background: #eee;
+  border-bottom: 1px solid #000;
 }
 
 #logo {
   font-size: 2em;
   text-transform: uppercase;
-  margin: 0.2em 0 0 0;
+}
+
+#logo * {
+  vertical-align: middle;
+}
+
+#select_branch {
+  margin-top: -.5em;
 }
 
 #sha {
@@ -44,7 +50,7 @@ a img {border: 0}
 #credit a {color: #999}
 
 #header:hover #credit,
-#header:hover #credit a {color: inherit}
+#header:hover #credit a {color: #999}
 
 #controls {
   position: absolute;
@@ -60,28 +66,42 @@ a img {border: 0}
 }
 
 #content {
-  padding: .5em 1em;
+  
 }
 
 #commits {
   width: 30%;
-  margin-right: 1%;
-  padding-right: 1%;
   float: left;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #000;
 }
+
+#commits a {text-decoration: none}
+#commits a:hover {text-decoration: underline}
 
 #commits li {
-  border-bottom: 1px solid #eee;
-  padding: 1em 0 .5em 0;
+  border-bottom: 1px solid #ccc;
+  padding: .75em 0 .25em 1em;
 }
 
+#commits li:hover {cursor: pointer}
+
+#commits li:hover a {text-decoration: underline}
+
 #commits li.selected {
-  font-weight: bold;
+  background: #eee;
+}
+
+#commits li.selected a {
+  text-decoration: underline;
 }
 
 #commits li:last-child {
   border: none;
+}
+
+#commits li a {
+  display: block;
+  color: #000;
 }
 
 #commits li .img {
@@ -93,17 +113,17 @@ a img {border: 0}
 }
 
 #commits li .message {
-  font-family: Courier;
-  font-size: .7em;
+  font-size: .8em;
   margin-left: 48px;
+  margin-top: -.35em;
 }
 
-#select_a_commit,
+.diff_loading,
 #diffs {
-  width: 67.5%;
+  width: 69.5%;
 }
 
-#select_a_commit {
+.diff_loading {
   position: fixed;
   top: 50%; right: 0;
   text-align: center;
@@ -123,7 +143,7 @@ a img {border: 0}
 
 #diffs .diff_container,
 #diffs .diff {
-  line-height: .4em;
+  line-height: .5em;
 }
 
 #diffs .overview,
@@ -148,8 +168,4 @@ a img {border: 0}
 .container {
   margin: 1em;
   padding: 0 1em;
-}
-
-#footer p {
-  text-align: right;
 }
