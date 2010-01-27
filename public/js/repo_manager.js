@@ -5,16 +5,19 @@ var RepoManager = {
     if (document.location.hash) {
       var sha = document.location.hash.substring(1)
       $("#commit_" + sha).click()
+    } else {
+      $("#commits li").eq(0).click()
     }
   },
   
   get_diff: function() {
     $("#diffs").html("<p class='diff_loading'>loading...</p>")
-    var c    = $(this)
+    var c = $(this)
     $("#commits li.selected").removeClass("selected")
     c.addClass("selected")
-    var sha  = /[^_]+$/.exec(c.attr("id"))[0]
+    var sha = /[^_]+$/.exec(c.attr("id"))[0]
     $.get("/diffs/" + sha, function(data) { $("#diffs").html(data) })
+    document.location.hash = sha
     $("#sha").html(sha.substring(0,18) + "...")
   }
 }

@@ -14,7 +14,8 @@
     #header
       .container
         #logo
-          NitGit / 
+          %a{ :href => "/", :id => "home" } NitGit
+          %span /
           %select{ :id => "select_branch" }
             - @repo.heads.each do |h|
               %option{ :value => h.name }
@@ -26,6 +27,7 @@
           %a{ :href => "http://greatseth.com" }
             Seth Thomas Rasmussen
         #controls
+          %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
           %label{ :for => "hide_merges" }
             %input{ :type => "checkbox", :id => "hide_merges" }
             Hide merges?

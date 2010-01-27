@@ -118,6 +118,8 @@ p {
   margin-top: -.35em;
 }
 
+#home {text-decoration: none}
+
 .diff_loading,
 #diffs {
   width: 69.5%;
@@ -135,6 +137,7 @@ p {
   float: left;
   font-family: Courier;
   font-size: .8em;
+  overflow: hidden;
 }
 
 #diffs .diff {
