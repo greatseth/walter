@@ -86,6 +86,7 @@ p {
 #commits li {
   border-bottom: 1px solid #ccc;
   padding: .6em 0 .25em 1em;
+  line-height: 1em;
 }
 
 #commits li:hover {cursor: pointer}
