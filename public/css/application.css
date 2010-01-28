@@ -67,7 +67,7 @@ p {
 
 #spinner {
   position: fixed;
-  top: 5.5em; left: .5em;
+  top: 1em; left: .75em;
 }
 
 #content {
