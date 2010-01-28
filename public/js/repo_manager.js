@@ -13,6 +13,8 @@ var RepoManager = {
     } else {
       $("#commits li").eq(0).click()
     }
+    
+    $("#select_branch").change(RepoManager.select_branch)
   },
   
   get_diff: function() {
@@ -26,6 +28,12 @@ var RepoManager = {
     })
     document.location.hash = sha
     $("#sha").html(sha.substring(0,18) + "...")
+  },
+  
+  select_branch: function() {
+    var select = $(this)
+    var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
+    document.location.href = "/" + selected_branch
   }
 }
 
