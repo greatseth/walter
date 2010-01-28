@@ -58,6 +58,7 @@ class NitGit < Sinatra::Base
   end
   
   def commits_for_page(page = @page)
+    page = setup_page unless page
     commits = repo.commits(@selected_branch, commits_per_page, ((page - 1) * commits_per_page))
     commits.reject! { |c| c.merge? } if @hide_merges
     commits
@@ -68,16 +69,26 @@ class NitGit < Sinatra::Base
   end
   
   get "/" do
-    @selected_branch = "master"
-    @page = params[:page] ? params[:page].to_i : 1
-    @branches = repo.branches.map { |b| b.name }
-    @commits = commits_for_page
+    @selected_branch = repo.head.name
+    redirect "/#{@selected_branch}/"
+  end
+  
+  get "/:head/?" do |head|
+    @selected_branch = head
+    @branches        = repo.branches.map { |b| b.name }
+    @commits         = commits_for_page
+    
     haml :index
   end
   
   get "/diffs/:sha" do |sha|
     @sha    = sha
     @commit = repo.commit(@sha)
+    
     haml :diffs, :layout => false
+  end
+  
+  def setup_page
+    @page = params[:page] ? params[:page].to_i : 1
   end
 end
