@@ -64,9 +64,10 @@ class Albino
     output = ""
     Open4.popen4(command) do |pid, stdin, stdout, stderr|
       stdin.puts @target
-      output << stdout.read.strip
+      stdin.close
+      output = stdout.read.strip
       
-      [stdin, stdout, stderr].each { |io| io.close }
+      [stdout, stderr].each { |io| io.close }
     end
     output
   end
