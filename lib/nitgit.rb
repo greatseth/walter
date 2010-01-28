@@ -49,7 +49,7 @@ class NitGit < Sinatra::Base
   enable :logging
   def logger; Vegas::Runner.logger; end
   
-  set :server, "mongrel"
+  set :server, "thin"
   
   def repo
     logger.info "attempting to load repo at #{self.class.pwd.inspect}"
