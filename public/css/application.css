@@ -2,7 +2,19 @@
 a img {border: 0}
 ol, ul {list-style: none}
 
+#debug {
+  display: none;
+  
+  position: fixed; top: 0; left: 0;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  z-index: 666;
+}
+
 body {
+  overflow: hidden;
+  
   padding: 4.2em 0 0 0;
   
   font-family: sans-serif;
@@ -78,6 +90,8 @@ p {
   width: 30%;
   float: left;
   border-right: 1px solid #000;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 #commits a {text-decoration: none}
@@ -121,7 +135,7 @@ p {
 #commits .merge {
   background-image: url(/images/HARDWARE.png);
   background-repeat: no-repeat;
-  background-position: .7em 50%;
+  background-position: .7em .25em;
 }
 
 #commits .merge .img {
@@ -168,7 +182,7 @@ p {
 
 #diffs.hiding_overflow {
   overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 #diffs .diff {

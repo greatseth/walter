@@ -15,6 +15,21 @@ var RepoManager = {
     }
     
     $("#select_branch").change(RepoManager.select_branch)
+    
+    RepoManager.observe_window_resize()
+  },
+  
+  observe_window_resize: function() {
+    RepoManager.fit_window()
+    $(window).resize(RepoManager.fit_window)
+  },
+  
+  fit_window: function() {
+    var height = window.innerHeight - parseInt($("#header").css("height"))
+    // $("#debug").html(height)
+    $("#commits").css({ height: height })
+    var diffs_width = window.innerWidth - parseInt($("#commits").css("width")) - 3
+    $("#diffs").css({ width: diffs_width, height: height })
   },
   
   get_diff: function() {
