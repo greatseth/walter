@@ -30,8 +30,6 @@
             Seth Thomas Rasmussen
         #controls
           %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
-          %label{ :for => "hide_merges" }
-            %input{ :type => "checkbox", :id => "hide_merges" }
-            Hide merges?
+          %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }
     #content.ui-helper-clearfix
       = yield
