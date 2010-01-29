@@ -24,6 +24,8 @@ Echoe.new "nitgit" do |p|
   
   p.description = p.summary = "A cross-platform, graphical interface to Git repositories."
   
+  p.runtime_dependencies = ["vegas", "sinatra", "grit", "haml", "open4"]
+  
   p.ignore_pattern = %w( test/**/* )
   p.retain_gemspec = true
   
