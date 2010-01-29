@@ -27,6 +27,7 @@ Echoe.new "nitgit" do |p|
   p.ignore_pattern = %w( test/**/* )
   p.retain_gemspec = true
   
+  p.use_sudo = false
   p.honor_gitignore!
 end
 
