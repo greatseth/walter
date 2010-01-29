@@ -11,6 +11,7 @@ lib/nitgit/grit_extensions.rb
 lib/nitgit/string_extensions.rb
 lib/repo_manager.rb
 lib/settings.rb
+nitgit.gemspec
 public/colorful.css
 public/css/application.css
 public/css/colorful.css
