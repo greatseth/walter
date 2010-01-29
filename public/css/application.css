@@ -94,7 +94,7 @@ p {
 #commits li:hover a {text-decoration: underline}
 
 #commits li.selected {
-  background: #eee;
+  background-color: #eee;
 }
 
 #commits li.selected a {
