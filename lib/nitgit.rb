@@ -34,8 +34,10 @@ class NitGit < Sinatra::Base
   
   require "haml"
   
-  NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
-  $: << NITGIT_LIB_DIR
+  unless defined? NITGIT_LIB_DIR
+    NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
+    $: << NITGIT_LIB_DIR
+  end
   
   require "nitgit/string_extensions"
   require "nitgit/grit_extensions"
@@ -70,7 +72,7 @@ class NitGit < Sinatra::Base
   
   get "/" do
     @selected_branch = repo.head.name
-    redirect "/#{@selected_branch}/"
+    redirect "/#{@selected_branch}"
   end
   
   get "/:head/?" do |head|
