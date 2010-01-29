@@ -118,11 +118,28 @@ p {
   height: 36px;
 }
 
+#commits .merge {
+  background-image: url(/images/HARDWARE.png);
+  background-repeat: no-repeat;
+  background-position: .7em 50%;
+}
+
+#commits .merge .img {
+  display: none
+}
+
 #commits li .message {
   font-size: .8em;
   margin-left: 48px;
   margin-top: -.35em;
 }
+
+#commits .merge .message {
+  margin-left: 20px;
+  color: #666;
+}
+
+#commits .merge:hover * {color: inherit}
 
 #home {text-decoration: none}
 

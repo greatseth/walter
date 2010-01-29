@@ -1,6 +1,6 @@
 %ol#commits
   -@commits.each do |c|
-    %li{ :id => "commit_#{c.id}", :class => "ui-helper-clearfix" }
+    %li{ :id => "commit_#{c.id}", :class => "ui-helper-clearfix #{'merge' if c.merge?}" }
       .img
         %a{ :href => "mailto:#{c.author}" }
           %img{ :src => c.author.gravatar_url(36) }
