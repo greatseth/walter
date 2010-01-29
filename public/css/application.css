@@ -139,6 +139,8 @@ p {
   color: #666;
 }
 
+#commits .merge .message .conflicts {color: red}
+
 #commits .merge:hover * {color: inherit}
 
 #home {text-decoration: none}

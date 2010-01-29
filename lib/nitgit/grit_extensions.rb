@@ -5,6 +5,13 @@ module Grit
     def merge?
       parents.size > 1
     end
+    
+    def message_html
+      message.
+        sub(/(Conflicts:\s*.+)/m, '<span class="conflicts">\1</span>').
+        sub("\n\n", "<br /><br />").
+        gsub("\n-", "<br />-")
+    end
   end
   
   class Actor
