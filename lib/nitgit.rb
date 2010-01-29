@@ -71,7 +71,7 @@ class NitGit < Sinatra::Base
   end
   
   get "/:head/?" do |head|
-    @selected_branch = head
+    @selected_branch = head.gsub(/--/, "/")
     @branches        = repo.branches.map { |b| b.name }
     @commits         = commits_for_page
     

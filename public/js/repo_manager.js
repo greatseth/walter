@@ -33,7 +33,7 @@ var RepoManager = {
   select_branch: function() {
     var select = $(this)
     var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
-    document.location.href = "/" + encodeURIComponent(selected_branch)
+    document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
   }
 }
 
