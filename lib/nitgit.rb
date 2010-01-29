@@ -22,6 +22,16 @@ module Sinatra
   end
 end
 
+# TODO these will obviously be deps when we're a bona fide gem
+require "grit"
+require "haml"
+
+NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
+$: << NITGIT_LIB_DIR
+
+require "albino"
+require "nitgit/string_extensions"
+require "nitgit/grit_extensions"
 
 class NitGit < Sinatra::Base
   set :environment, :development
@@ -29,20 +39,6 @@ class NitGit < Sinatra::Base
   configure :development do
     use Sinatra::Reloader
   end
-  
-  ###
-  
-  require "haml"
-  
-  unless defined? NITGIT_LIB_DIR
-    NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
-    $: << NITGIT_LIB_DIR
-  end
-  
-  require "nitgit/string_extensions"
-  require "nitgit/grit_extensions"
-  
-  ###
   
   set :root, File.join(NITGIT_LIB_DIR, "..")
   
@@ -55,7 +51,6 @@ class NitGit < Sinatra::Base
   
   def repo
     logger.info "attempting to load repo at #{self.class.pwd.inspect}"
-    require "grit"
     @repo ||= Grit::Repo.new(self.class.pwd)
   end
   

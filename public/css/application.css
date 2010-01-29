@@ -94,7 +94,7 @@ p {
 #commits li:hover a {text-decoration: underline}
 
 #commits li.selected {
-  background: #eee;
+  background-color: #eee;
 }
 
 #commits li.selected a {
@@ -138,6 +138,8 @@ p {
   margin-left: 20px;
   color: #666;
 }
+
+#commits .merge .message .conflicts {color: red}
 
 #commits .merge:hover * {color: inherit}
 

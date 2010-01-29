@@ -5,7 +5,7 @@
         %a{ :href => "mailto:#{c.author}" }
           %img{ :src => c.author.gravatar_url(36) }
       %a{ :href => "##{c.id}", :class => "message" }
-        = c.message.sub("\n\n", "<br /><br />").gsub("\n-", "<br />-")
+        = c.message_html
 
 #diffs
   %p.diff_loading
