@@ -88,7 +88,7 @@ p {
 
 #spinner {
   position: fixed;
-  top: 1em; left: .75em;
+  top: 1em; right: .75em;
 }
 
 #content {
