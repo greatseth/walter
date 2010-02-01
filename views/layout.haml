@@ -14,22 +14,21 @@
   %body
     #debug
     #header
-      .container
-        #logo
-          %a{ :href => "/", :id => "home" } NitGit
-          %span /
-          %select{ :id => "select_branch" }
-            - @repo.heads.each do |h|
-              %option{ :value => h.name, :selected => (@selected_branch == h.name) }
-                = h.name
-          %span /
-          %span#sha
-        %p#credit
-          &copy; 2010
-          %a{ :href => "http://greatseth.com" }
-            Seth Thomas Rasmussen
-        #controls
-          %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
-          %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }
+      #logo
+        %a{ :href => "/", :id => "home" } NitGit
+        %span /
+        %select{ :id => "select_branch" }
+          - @repo.heads.each do |h|
+            %option{ :value => h.name, :selected => (@selected_branch == h.name) }
+              = h.name
+        %span /
+        %span#sha
+      %p#credit
+        &copy; 2010
+        %a{ :href => "http://greatseth.com" }
+          Seth Thomas Rasmussen
+      #controls
+        %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
+        %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }
     #content.ui-helper-clearfix
       = yield

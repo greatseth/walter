@@ -25,10 +25,11 @@ var RepoManager = {
   },
   
   fit_window: function() {
-    var height = window.innerHeight - parseInt($("#header").css("height"))
-    // $("#debug").html(height)
+    // TODO test other browsers.. 20 used here is specific to Mac Firefox
+    var height      = window.innerHeight - parseInt($("#header").css("height")) - 20
+    var diffs_width = window.innerWidth  - parseInt($("#commits").css("width")) - 3
+    
     $("#commits").css({ height: height })
-    var diffs_width = window.innerWidth - parseInt($("#commits").css("width")) - 3
     $("#diffs").css({ width: diffs_width, height: height })
   },
   
