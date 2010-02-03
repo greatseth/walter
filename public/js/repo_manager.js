@@ -5,7 +5,7 @@ $.ajaxSetup({
 
 var RepoManager = {
   onload: function() {
-    $("#commits li").click(RepoManager.get_diff)
+    $("#commits li").live("click", RepoManager.get_diff)
     
     if (document.location.hash) {
       var sha = document.location.hash.substring(1)
@@ -33,6 +33,7 @@ var RepoManager = {
     $("#diffs").css({ width: diffs_width, height: height })
   },
   
+  // TODO return early when .selected
   get_diff: function() {
     $("#diffs").removeClass("hiding_overflow").html('<p class="diff_loading">loading...</p>')
     var c = $(this)
