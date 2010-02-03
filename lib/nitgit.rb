@@ -25,6 +25,7 @@ end
 # TODO these will obviously be deps when we're a bona fide gem
 require "grit"
 require "haml"
+require "json"
 
 NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
 $: << NITGIT_LIB_DIR
@@ -72,8 +73,9 @@ class NitGit < Sinatra::Base
   
   get "/:head/?" do |head|
     @selected_branch = head.gsub(/--/, "/")
-    @branches        = repo.branches.map { |b| b.name }
     @commits         = commits_for_page
+    
+    setup_branches_json
     
     haml :index
   end
@@ -82,7 +84,13 @@ class NitGit < Sinatra::Base
     @sha    = sha
     @commit = repo.commit(@sha)
     
+    setup_branches_json
+    
     haml :diffs, :layout => false
+  end
+  
+  def setup_branches_json
+    @branches_json = repo.branches.map { |b| n = b.name; { :value => n, :name => n } }.to_json
   end
   
   def setup_page

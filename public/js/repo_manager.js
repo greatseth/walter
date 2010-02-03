@@ -37,18 +37,58 @@ var RepoManager = {
     })
   },
   
-  observe_branch_selection: function(){
-    $("#select_branch").change(function() {
-      var select = $(this)
-      var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
-      document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
+  handle_branch_search: function() {
+    
+  },
+  
+  observe_branch_selection: function() {
+    $("#select_branch_search").keypress(function(e) {
+      switch(e.keyCode) {
+        case 27:
+          $("#selected_branch").show()
+          // $("#select_branch .as-results").add("#select_branch .as-selections").hide()
+          $(this).attr("value", "").hide()
+          break
+        case 38: // up
+          RepoManager.move_branch_search_selection_up()
+          // TODO
+          break
+        case 40: // down
+          // TODO
+          break
+        case 8: // backspace
+          break
+        case 9: // tab
+          break
+        case 13: // return
+          break
+        default:
+          RepoManager.handle_branch_search()
+      }
     })
+    
+    /*
+    $("#select_branch_search").autoSuggest(RepoManager.branches, {
+      start: function() { console.log("entering autoSuggest start hook") },
+      startText: "",
+      selectionClick: RepoManager.branch_selection_handler
+    })
+    */
+    
+    $("#select_branch").click(function() {
+      $("#selected_branch").hide()
+      $("#select_branch_search").show().focus()
+    })
+  },
+  
+  branch_selection_handler: function(selection) {
+    console.log("selected branch", selection)
+    document.location = "/" + selection.html()
   },
   
   observe_hotkeys: function() {
     $(document).bind('keyup', 'b', function() {
-      // TODO we'll need to implement our own 'select' for this to work
-      // $("#select_branch").click()
+      $("#select_branch").click()
     })
     
     $(document).bind('keyup', 'c', function() {

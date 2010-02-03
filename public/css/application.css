@@ -16,7 +16,7 @@ ol, ul {list-style: none}
 body {
   overflow: hidden;
   
-  padding: 3.45em 0 0 0;
+  padding: 3.25em 0 0 0;
   
   font-family: sans-serif;
   font-size: 1em;
@@ -43,6 +43,17 @@ p {
   border-bottom: 1px solid #000;
 }
 
+#header .sep {
+  margin: 0 .25em;
+  color: #ccc;
+}
+
+#header a {text-decoration: none}
+
+#header div {
+  float: left;
+}
+
 #logo {
   font-size: 2em;
   text-transform: uppercase;
@@ -53,14 +64,38 @@ p {
 }
 
 #select_branch {
-  margin-top: -.5em;
+  position: relative;
+}
+#select_branch_search {
+  display: none;
 }
 
+.as-selection-item {display: none}
+
+#select_branch .as-results {
+  position: absolute; top: 100%; left: 0;
+  float: none;
+  width: 200px;
+  font-size: .5em !important;
+  background: #fff;
+  width: 300px;
+}
+
+#select_branch .as-list {width: auto !important;}
+
+#select_branch .as-results .active {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+#select_branch .as-results em {font-style: normal}
+
 #sha {
-  color: #ccc;
+  color: #999;
 }
 
 #credit {
+  clear: left;
   font-size: .6em;
   margin: .2em 0 0 0;
 }
@@ -69,7 +104,7 @@ p {
 #credit a {color: #999}
 
 #header:hover #credit,
-#header:hover #credit a {color: #999}
+#header:hover #credit a {color: #999 !important}
 
 #controls {
   position: absolute;
@@ -84,15 +119,11 @@ p {
   margin-left: .5em;
 }
 
-#hide_merges {display: none;}
+#hide_merges {display: none}
 
 #spinner {
   position: fixed;
   top: 1em; right: .75em;
-}
-
-#content {
-  
 }
 
 #commits {
@@ -165,8 +196,6 @@ p {
 #commits .merge .message .conflicts {color: red}
 
 #commits .merge:hover * {color: inherit}
-
-#home {text-decoration: none}
 
 .diff_loading,
 #diffs {
