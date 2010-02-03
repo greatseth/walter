@@ -15,7 +15,8 @@
     #debug
     #header
       #logo
-        %a{ :href => "/", :id => "home" } NitGit
+        %a{ :href => "/", :id => "home" }
+          = @project_name
         %span.sep /
         %select{ :id => "select_branch" }
           - @repo.heads.each do |h|
@@ -24,7 +25,7 @@
         %span.sep /
         %span#sha
       %p#credit
-        by
+        nitgit by
         %a{ :href => "http://greatseth.com" }
           greatseth
       #controls
