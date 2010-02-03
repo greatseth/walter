@@ -112,21 +112,26 @@ p {
   overflow-y: scroll;
 }
 
+#commits,
+#commits li {
+  background: #666;
+}
+
 #commits a {
   text-decoration: none;
-  color: #777;
+  color: #000;
 }
 
 #commits li {
-  color: #777;
-  border-bottom: 1px solid #777;
+  color: #eee;
+  border-bottom: 1px solid #444;
   padding: .6em 0 .25em .5em;
   line-height: 1em;
 }
 
 #commits li:hover {
   cursor: pointer;
-  background-color: #eee;
+  background-color: #888;
 }
 
 #commits li.selected:hover,
@@ -138,13 +143,9 @@ p {
   background: #5d99d1 url(/images/bg-commit-selected.gif) 0 0 repeat-x;
 }
 
-#commits li:last-child {
-  border: none;
-}
-
 #commits li a {
   display: block;
-  color: #000;
+  color: #fff;
 }
 
 #commits li .img {
@@ -173,10 +174,14 @@ p {
 
 #commits .merge .message {
   margin-left: 32px;
-  color: #666;
+  color: #fff;
 }
 
-#commits .merge .message .conflicts {color: red}
+#commits .merge .message .conflicts {
+  display: block;
+  margin-top: .5em;
+  color: #000;
+}
 
 #commits .merge:hover * {color: inherit}
 
