@@ -22,7 +22,7 @@
     #header.ui-helper-clearfix
       #logo
         #home
-          %a{ :href => "/" } NitGit
+          %a{ :href => "/", :id => "home" } NitGit
         .sep /
         #select_branch
           %span{ :id => "selected_branch" }
@@ -31,9 +31,9 @@
         .sep /
         #sha
       %p#credit
-        &copy; 2010
+        by
         %a{ :href => "http://greatseth.com" }
-          Seth Thomas Rasmussen
+          greatseth
       #controls
         %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
         %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }

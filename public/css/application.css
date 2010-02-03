@@ -18,7 +18,7 @@ body {
   
   padding: 3.25em 0 0 0;
   
-  font-family: sans-serif;
+  font-family: "Gothic Bold", sans-serif;
   font-size: 1em;
   line-height: 1.4em;
   color: #000;
@@ -39,8 +39,8 @@ p {
   padding: .75em;
   padding-bottom: .5em;
   
-  background: #eee;
-  border-bottom: 1px solid #000;
+  background: #222;
+  border-top: 1px solid #777;
 }
 
 #header .sep {
@@ -53,6 +53,13 @@ p {
 #header div {
   float: left;
 }
+
+#header,
+#header a {
+  color: #fff;
+}
+
+#header .sep {color: #5d99d1}
 
 #logo {
   font-size: 2em;
@@ -91,13 +98,15 @@ p {
 #select_branch .as-results em {font-style: normal}
 
 #sha {
-  color: #999;
+/*  color: #ccc;*/
 }
 
 #credit {
   clear: left;
   font-size: .6em;
   margin: .2em 0 0 0;
+  width: 10.25em;
+  text-align: right;
 }
 
 #credit,
@@ -134,25 +143,30 @@ p {
   overflow-y: scroll;
 }
 
-#commits a {text-decoration: none}
-#commits a:hover {text-decoration: underline}
+#commits a {
+  text-decoration: none;
+  color: #777;
+}
 
 #commits li {
-  border-bottom: 1px solid #ccc;
-  padding: .6em 0 .25em 1em;
+  color: #777;
+  border-bottom: 1px solid #777;
+  padding: .6em 0 .25em .5em;
   line-height: 1em;
 }
 
-#commits li:hover {cursor: pointer}
-
-#commits li:hover a {text-decoration: underline}
-
-#commits li.selected {
+#commits li:hover {
+  cursor: pointer;
   background-color: #eee;
 }
 
-#commits li.selected a {
-  text-decoration: underline;
+#commits li.selected:hover,
+#commits li.selected a:hover {
+  cursor: default;
+}
+
+#commits li.selected {
+  background: #5d99d1 url(/images/bg-commit-selected.gif) 0 0 repeat-x;
 }
 
 #commits li:last-child {
@@ -168,14 +182,14 @@ p {
   float: left;
   margin: 0 0.5em 0.3em 0;
   border: 1px solid #444;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
 }
 
 #commits .merge {
   background-image: url(/images/HARDWARE.png);
   background-repeat: no-repeat;
-  background-position: .7em .25em;
+  background-position: 1em .2em;
 }
 
 #commits .merge .img {
@@ -184,12 +198,12 @@ p {
 
 #commits li .message {
   font-size: .8em;
-  margin-left: 48px;
-  margin-top: -.35em;
+  margin-left: 32px;
+  margin-top: -.2em;
 }
 
 #commits .merge .message {
-  margin-left: 20px;
+  margin-left: 32px;
   color: #666;
 }
 

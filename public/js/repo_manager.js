@@ -23,7 +23,7 @@ var RepoManager = {
   },
   
   observe_commit_selection: function(){
-    $("#commits li").click(function() {
+    $("#commits li").live("click", function() {
       $("#diffs").removeClass("hiding_overflow").html('<p class="diff_loading">loading...</p>')
       var c = $(this)
       $("#commits li.selected").removeClass("selected")
@@ -108,6 +108,12 @@ var RepoManager = {
     
     $("#commits").css({ height: height })
     $("#diffs").css({ width: diffs_width, height: height })
+  },
+  
+  select_branch: function() {
+    var select = $(this)
+    var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
+    document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
   }
 }
 
