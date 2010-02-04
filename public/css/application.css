@@ -162,7 +162,7 @@ p {
   border-bottom: 1px solid #444;
   padding: .6em 0 .25em .5em;
   line-height: 1em;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: 1px 1px 1px #222;
 }
 
 #commits li:hover {
@@ -208,7 +208,7 @@ p {
   display: block;
   margin-top: .5em;
   color: #000;
-  text-shadow: 1px 1px 1px #444;
+  text-shadow: 1px 1px 1px #777;
 }
 
 #commits .merge:hover * {
