@@ -45,7 +45,6 @@ class NitGit < Sinatra::Base
       :server      => "thin"
   
   enable :static, :logging, :dump_errors
-  disable :raise_errors, :dump_errors
   enable :show_exceptions if development?
   
   def repo
