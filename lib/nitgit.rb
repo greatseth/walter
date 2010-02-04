@@ -44,7 +44,9 @@ class NitGit < Sinatra::Base
       :root        => File.join(NITGIT_LIB_DIR, ".."),
       :server      => "thin"
   
-  enable :static, :logging, :dump_errors, :raise_errors
+  enable :static, :logging, :dump_errors
+  disable :raise_errors, :dump_errors
+  enable :show_exceptions if development?
   
   def repo
     logger.info "attempting to load repo at #{self.class.pwd.inspect}"
