@@ -3,7 +3,7 @@
   - highlighted_diff = d.diff.utf8.highlight(lexer).to_s
   - highlighted_diff.each do |line|
     - klass = line.diff_container_class
-    .diff_conatiner{ :class => klass }
+    .diff_container{ :class => klass }
       - if line.diff_special_line?
         .diff{ :class => klass }
           = line

@@ -8,5 +8,7 @@
         = c.message_html
 
 #diffs
-  %p.diff_loading
-    Select a commit to view the changes.
+  %img.spinner{ :src => "/images/spinner-black-on-white.gif", :style => "display:none" }
+  .content
+    %p.diff_loading
+      Select a commit to view the changes.

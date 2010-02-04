@@ -2,21 +2,8 @@
 a img {border: 0}
 ol, ul {list-style: none}
 
-#debug {
-  display: none;
-  position: fixed; top: 0; left: 0;
-  
-  padding: .25em .5em;
-  width: 100%;
-  background: #000;
-  color: #fff;
-  z-index: 666;
-}
-
 body {
   overflow: hidden;
-  
-  padding: 3.25em 0 0 0;
   
   font-family: "Gothic Bold", sans-serif;
   font-size: 1em;
@@ -29,18 +16,21 @@ p {
 }
 
 #header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  
-  /* padding-bottom here is linked with body padding-top
-     to get the header and content panes to line up.. 
-     the two should add up to about 4.2em */
-  padding: .75em;
-  padding-bottom: .5em;
-  
-  background: #222;
+  background: #000;
   border-top: 1px solid #777;
+  border-bottom: 1px solid #666;
+  padding: .5em;
+}
+
+#header .sep {
+  margin: 0 .25em;
+  color: #ccc;
+}
+
+#header a {text-decoration: none}
+
+#header div {
+  float: left;
 }
 
 #header .sep {
@@ -57,12 +47,16 @@ p {
 #header,
 #header a {
   color: #fff;
+  text-shadow: 0 1px 0 #5d99d1;
 }
 
-#header .sep {color: #5d99d1}
+#header .sep {
+  color: #5d99d1;
+  text-shadow: none;
+}
 
 #logo {
-  font-size: 2em;
+  font-size: 1.4em;
   text-transform: uppercase;
 }
 
@@ -73,44 +67,37 @@ p {
 #select_branch {
   position: relative;
 }
+
 #select_branch_search {
   display: none;
 }
 
 .as-selection-item {display: none}
 
-#select_branch .as-results {
-  position: absolute; top: 100%; left: 0;
-  float: none;
-  width: 200px;
-  font-size: .5em !important;
+#branches {
+  display: none;
+  position: absolute;
+  top: 1.5em; left: 0;
+  
   background: #fff;
-  width: 300px;
 }
 
-#select_branch .as-list {width: auto !important;}
-
-#select_branch .as-results .active {
-  font-weight: bold;
-  background-color: #eee;
-}
-
-#select_branch .as-results em {font-style: normal}
-
-#sha {
-/*  color: #ccc;*/
+#branches li {
+  font-size: .8em;
+  text-shadow: none;
 }
 
 #credit {
   clear: left;
   font-size: .6em;
-  margin: .2em 0 0 0;
-  width: 10.25em;
-  text-align: right;
+  margin: .4em 0 0 .2em;
 }
 
 #credit,
-#credit a {color: #999}
+#credit a {
+  color: #999;
+  text-shadow: none;
+}
 
 #header:hover #credit,
 #header:hover #credit a {color: #999 !important}
@@ -130,9 +117,19 @@ p {
 
 #hide_merges {display: none}
 
-#spinner {
+#header .spinner {
   position: fixed;
   top: 1em; right: .75em;
+}
+
+#content {
+  position: relative;
+}
+
+#content .spinner {
+  position: absolute;
+  top: 50%; left: 50%;
+  margin: -12px 0 0 -12px;
 }
 
 #commits {
@@ -143,21 +140,27 @@ p {
   overflow-y: scroll;
 }
 
+#commits,
+#commits li {
+  background: #666;
+}
+
 #commits a {
   text-decoration: none;
-  color: #777;
+  color: #000;
 }
 
 #commits li {
-  color: #777;
-  border-bottom: 1px solid #777;
+  color: #eee;
+  border-bottom: 1px solid #444;
   padding: .6em 0 .25em .5em;
   line-height: 1em;
+  text-shadow: 1px 1px 1px #000;
 }
 
 #commits li:hover {
   cursor: pointer;
-  background-color: #eee;
+  background-color: #888;
 }
 
 #commits li.selected:hover,
@@ -169,13 +172,10 @@ p {
   background: #5d99d1 url(/images/bg-commit-selected.gif) 0 0 repeat-x;
 }
 
-#commits li:last-child {
-  border: none;
-}
-
-#commits li a {
+#commits a {
   display: block;
-  color: #000;
+  color: #fff;
+  outline: none;
 }
 
 #commits li .img {
@@ -186,16 +186,6 @@ p {
   height: 24px;
 }
 
-#commits .merge {
-  background-image: url(/images/HARDWARE.png);
-  background-repeat: no-repeat;
-  background-position: 1em .2em;
-}
-
-#commits .merge .img {
-  display: none
-}
-
 #commits li .message {
   font-size: .8em;
   margin-left: 32px;
@@ -204,12 +194,19 @@ p {
 
 #commits .merge .message {
   margin-left: 32px;
-  color: #666;
+  color: #fff;
 }
 
-#commits .merge .message .conflicts {color: red}
+#commits .merge .message .conflicts {
+  display: block;
+  margin-top: .5em;
+  color: #000;
+  text-shadow: 1px 1px 1px #777;
+}
 
-#commits .merge:hover * {color: inherit}
+#commits .merge:hover * {
+  color: inherit;
+}
 
 .diff_loading,
 #diffs {
@@ -230,6 +227,8 @@ p {
   font-size: .8em;
   overflow-x: auto;
   overflow-y: auto;
+  background: #fff;
+  position: relative;
 }
 
 #diffs.hiding_overflow {
@@ -239,6 +238,7 @@ p {
 
 #diffs .diff {
   white-space: pre;
+  background: #fff;
 }
 
 #diffs .diff_container,
@@ -249,14 +249,19 @@ p {
 #diffs .overview,
 #diffs .overview span {
   color: #fff;
+  text-shadow: 0px 1px 2px #333;
   background: #666;
   font-weight: bold;
 }
 
-#diffs .overview {margin-top: 1em}
-#diffs .overview:first-child,
-#diffs .overview + .overview,
-#diffs .overview + .overview .overview {margin-top: 0}
+#diffs .diff_container.overview {
+  border-top: 2em solid #000;
+  border-bottom: 1px solid #444;
+}
+#diffs .diff_container.overview + .diff_container.overview,
+#diffs .diff_container.overview:first-child {
+  border-top: none;
+}
 
 #diffs .add    {background: #ECF8D2}
 #diffs .remove {background: #FAEBEB}

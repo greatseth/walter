@@ -1,7 +1,18 @@
 $.ajaxSetup({
-  beforeSend: function() { $("#spinner").show() },
-  complete:   function() { $("#spinner").hide() }
+  beforeSend: function() { $("#header .spinner").show() },
+  complete:   function() { $("#header .spinner").hide() }
 })
+
+// http://javascriptly.com/2008/09/javascript-to-detect-google-chrome/
+var userAgent = navigator.userAgent.toLowerCase();
+$.browser = {
+  version: (userAgent.match( /.+(?:rv|it|ra|ie|me)[\/: ]([\d.]+)/ ) || [])[1],
+  chrome:  /chrome/.test( userAgent ),
+  safari:  /webkit/.test( userAgent ) && !/chrome/.test( userAgent ),
+  opera:   /opera/.test( userAgent ),
+  msie:    /msie/.test( userAgent ) && !/opera/.test( userAgent ),
+  mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+}
 
 var RepoManager = {
   onload: function() {
@@ -23,30 +34,23 @@ var RepoManager = {
   },
   
   observe_commit_selection: function(){
-    $("#commits li").live("click", function() {
-      $("#diffs").removeClass("hiding_overflow").html('<p class="diff_loading">loading...</p>')
-      var c = $(this)
-      $("#commits li.selected").removeClass("selected")
-      c.addClass("selected")
-      var sha = /[^_]+$/.exec(c.attr("id"))[0]
-      $.get("/diffs/" + sha, function(data) {
-        $("#diffs").addClass("hiding_overflow").html(data)
-      })
-      document.location.hash = sha
-      $("#sha").html(sha.substring(0,18) + "...")
-    })
+    $("#commits li").live("click", RepoManager.get_diff)
   },
   
   handle_branch_search: function() {
     
   },
   
+  reset_branch_search: function() {
+    $("#branches").hide()
+  },
+  
   observe_branch_selection: function() {
     $("#select_branch_search").keypress(function(e) {
+      $("#branches").show()
       switch(e.keyCode) {
         case 27:
           $("#selected_branch").show()
-          // $("#select_branch .as-results").add("#select_branch .as-selections").hide()
           $(this).attr("value", "").hide()
           break
         case 38: // up
@@ -65,6 +69,8 @@ var RepoManager = {
         default:
           RepoManager.handle_branch_search()
       }
+      
+      setTimeout(RepoManager.reset_branch_search, 2000)
     })
     
     /*
@@ -91,6 +97,10 @@ var RepoManager = {
       $("#select_branch").click()
     })
     
+    $(document).bind('keyup', 'h', function() {
+      document.location.href = $("#home a").attr("href")
+    })
+    
     $(document).bind('keyup', 'c', function() {
       // TODO implement "click on sha to enter sha" feature :)
       // $("#sha").click()
@@ -103,11 +113,39 @@ var RepoManager = {
   
   fit_window: function() {
     // TODO test other browsers.. 20 used here is specific to Mac Firefox
-    var height      = window.innerHeight - parseInt($("#header").css("height")) - 20
-    var diffs_width = window.innerWidth  - parseInt($("#commits").css("width")) - 3
+    var height      = window.innerHeight - parseInt($("#header").css("height")) - 18
+    var diffs_width = window.innerWidth  - parseInt($("#commits").css("width")) - RepoManager.fit_window_width_offset()
     
     $("#commits").css({ height: height })
     $("#diffs").css({ width: diffs_width, height: height })
+  },
+  
+  fit_window_width_offset: function() {
+    if ($.browser.chrome || $.browser.safari) {
+      return 16
+    } else { // firefox
+      return 3
+    }
+  },
+  
+  // TODO return early when .selected
+  get_diff: function() {
+    $("#diffs").removeClass("hiding_overflow")
+    $("#diffs .content").html("")
+    $("#diffs .spinner").show()
+    
+    var c = $(this)
+    $("#commits li.selected").removeClass("selected")
+    c.addClass("selected")
+    
+    var sha = /[^_]+$/.exec(c.attr("id"))[0]
+    $.get("/diffs/" + sha, function(data) {
+      $("#diffs .spinner").hide()
+      $("#diffs").addClass("hiding_overflow")
+      $("#diffs .content").html(data)
+    })
+    document.location.hash = sha
+    $("#sha").html(sha)
   },
   
   select_branch: function() {

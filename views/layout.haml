@@ -16,13 +16,13 @@
     -#%script{ :src => "/js/prettify.js" }
     %script{ :src => "/js/repo_manager.js" }
     :javascript
-      RepoManager.branches = #{@branches_json}
+      RepoManager.branches = #{@branches}
   %body
-    #debug
     #header.ui-helper-clearfix
       #logo
         #home
-          %a{ :href => "/", :id => "home" } NitGit
+          %a{ :href => "/" }
+            = @project_name
         .sep /
         #select_branch
           %span{ :id => "selected_branch" }
@@ -31,11 +31,9 @@
         .sep /
         #sha
       %p#credit
-        by
+        nitgit by
         %a{ :href => "http://greatseth.com" }
           greatseth
-      #controls
-        %img#spinner{ :src => "/images/spinner.gif", :style => "display:none"}
-        %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }
+      %img.spinner{ :src => "/images/spinner-white-on-black.gif", :style => "display:none" }
     #content.ui-helper-clearfix
       = yield
