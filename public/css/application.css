@@ -2,21 +2,8 @@
 a img {border: 0}
 ol, ul {list-style: none}
 
-#debug {
-  display: none;
-  position: fixed; top: 0; left: 0;
-  
-  padding: .25em .5em;
-  width: 100%;
-  background: #000;
-  color: #fff;
-  z-index: 666;
-}
-
 body {
   overflow: hidden;
-  
-  padding: 3.45em 0 0 0;
   
   font-family: "Gothic Bold", sans-serif;
   font-size: 1em;
@@ -29,18 +16,21 @@ p {
 }
 
 #header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  
-  /* padding-bottom here is linked with body padding-top
-     to get the header and content panes to line up.. 
-     the two should add up to about 4.2em */
-  padding: .75em .75em .5em .5em;
-  
   background: #000;
   border-top: 1px solid #777;
   border-bottom: 1px solid #666;
+  padding: .5em;
+}
+
+#header .sep {
+  margin: 0 .25em;
+  color: #ccc;
+}
+
+#header a {text-decoration: none}
+
+#header div {
+  float: left;
 }
 
 #header,
@@ -55,7 +45,7 @@ p {
 }
 
 #logo {
-  font-size: 2em;
+  font-size: 1.4em;
   text-transform: uppercase;
 }
 
@@ -64,14 +54,48 @@ p {
 }
 
 #select_branch {
-  margin-top: -.25em;
+  position: relative;
 }
 
-#sha {
-/*  color: #ccc;*/
+#select_branch_search {
+  display: none;
+}
+
+.as-selection-item {display: none}
+
+#select_branch .as-results {
+  position: absolute; top: 100%; left: 0;
+  float: none;
+  width: 200px;
+  font-size: .5em !important;
+  background: #fff;
+  width: 300px;
+}
+
+#select_branch .as-list {width: auto !important;}
+
+#select_branch .as-results .active {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+#select_branch .as-results em {font-style: normal}
+
+#branches {
+  display: none;
+  position: absolute;
+  top: 1.5em; left: 0;
+  
+  background: #fff;
+}
+
+#branches li {
+  font-size: .8em;
+  text-shadow: none;
 }
 
 #credit {
+  clear: left;
   font-size: .6em;
   margin: .4em 0 0 .2em;
 }
@@ -115,7 +139,6 @@ p {
   margin: -12px 0 0 -12px;
 }
 
-
 #commits {
   width: 30%;
   float: left;
@@ -139,7 +162,7 @@ p {
   border-bottom: 1px solid #444;
   padding: .6em 0 .25em .5em;
   line-height: 1em;
-  text-shadow: 0px 1px 2px #333;
+  text-shadow: 1px 1px 1px #000;
 }
 
 #commits li:hover {
@@ -170,9 +193,6 @@ p {
   height: 24px;
 }
 
-/*#commits .merge .img {visibility: hidden}*/
-/*#commits .merge:hover .img {visibility: visible}*/
-
 #commits li .message {
   font-size: .8em;
   margin-left: 32px;
@@ -188,9 +208,12 @@ p {
   display: block;
   margin-top: .5em;
   color: #000;
+  text-shadow: 1px 1px 1px #444;
 }
 
-#commits .merge:hover * {color: inherit}
+#commits .merge:hover * {
+  color: inherit;
+}
 
 #home {text-decoration: none}
 

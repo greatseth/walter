@@ -11,25 +11,27 @@
     %script{ :src => "/js/pxem.jQuery.js" }
     -# %script{ :src => "/js/prettify.js" }
     %script{ :src => "/js/repo_manager.js" }
+    :javascript
+      RepoManager.branches = #{@branches}
   %body
-    #debug
-    #header
+    #header.ui-helper-clearfix
       #logo
-        %a{ :href => "/", :id => "home" }
-          = @project_name
-        %span.sep /
-        %select{ :id => "select_branch" }
-          - @repo.heads.each do |h|
-            %option{ :value => h.name, :selected => (@selected_branch == h.name) }
-              = h.name
-        %span.sep /
-        %span#sha
+        #home
+          %a{ :href => "/" }
+            = @project_name
+        .sep /
+        #select_branch
+          %select
+            - @repo.heads.each do |h|
+              %option{ :value => h.name, :selected => (@selected_branch == h.name) }
+                = h.name
+          %input{ :type => "text", :id => "select_branch_search" }
+        .sep /
+        #sha
       %p#credit
         nitgit by
         %a{ :href => "http://greatseth.com" }
           greatseth
-      #controls
-        %img.spinner{ :src => "/images/spinner-white-on-black.gif", :style => "display:none" }
-        %input{ :type => "button", :id => "hide_merges", :value => "Hide Merges" }
+      %img.spinner{ :src => "/images/spinner-white-on-black.gif", :style => "display:none" }
     #content.ui-helper-clearfix
       = yield

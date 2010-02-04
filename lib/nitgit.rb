@@ -34,20 +34,17 @@ require "nitgit/string_extensions"
 require "nitgit/grit_extensions"
 
 class NitGit < Sinatra::Base
-  set :environment, :development
+  def logger; Vegas::Runner.logger; end
   
   configure :development do
     use Sinatra::Reloader
   end
   
-  set :root, File.join(NITGIT_LIB_DIR, "..")
+  set :environment => :development,
+      :root        => File.join(NITGIT_LIB_DIR, ".."),
+      :server      => "thin"
   
-  enable :static
-  
-  enable :logging
-  def logger; Vegas::Runner.logger; end
-  
-  set :server, "thin"
+  enable :static, :logging, :dump_errors, :raise_errors
   
   def repo
     logger.info "attempting to load repo at #{self.class.pwd.inspect}"
@@ -71,18 +68,17 @@ class NitGit < Sinatra::Base
   end
   
   get "/:head/?" do |head|
-    @project_name = File.basename(self.class.pwd)
+    @project_name    = File.basename(self.class.pwd)
     @selected_branch = head.gsub(/--/, "/")
     @branches        = repo.branches.map { |b| b.name }
     @commits         = commits_for_page
-    
     haml :index
   end
   
   get "/diffs/:sha" do |sha|
-    @sha    = sha
-    @commit = repo.commit(@sha)
-    
+    @sha      = sha
+    @commit   = repo.commit(@sha)
+    @branches = repo.branches.map { |b| b.name }
     haml :diffs, :layout => false
   end
   

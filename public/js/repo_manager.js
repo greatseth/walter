@@ -25,9 +25,86 @@ var RepoManager = {
       $("#commits li").eq(0).click()
     }
     
-    $("#select_branch").change(RepoManager.select_branch)
+    $("#select_branch select").change(RepoManager.select_branch)
     
+    // Now do general app onload-ery..
+    RepoManager.fit_window()
     RepoManager.observe_window_resize()
+    RepoManager.observe_branch_selection()
+    // RepoManager.observe_hotkeys()
+  },
+  
+  observe_commit_selection: function(){
+    $("#commits li").live("click", RepoManager.get_diff)
+  },
+  
+  handle_branch_search: function() {
+    
+  },
+  
+  reset_branch_search: function() {
+    $("#branches").hide()
+  },
+  
+  observe_branch_selection: function() {
+    $("#select_branch_search").keypress(function(e) {
+      $("#branches").show()
+      switch(e.keyCode) {
+        case 27:
+          $("#selected_branch").show()
+          $(this).attr("value", "").hide()
+          break
+        case 38: // up
+          RepoManager.move_branch_search_selection_up()
+          // TODO
+          break
+        case 40: // down
+          // TODO
+          break
+        case 8: // backspace
+          break
+        case 9: // tab
+          break
+        case 13: // return
+          break
+        default:
+          RepoManager.handle_branch_search()
+      }
+      setTimeout(RepoManager.reset_branch_search, 2000)
+    })
+    
+    /*
+    $("#select_branch_search").autoSuggest(RepoManager.branches, {
+      start: function() { console.log("entering autoSuggest start hook") },
+      startText: "",
+      selectionClick: RepoManager.branch_selection_handler
+    })
+    */
+    
+    $("#select_branch").click(function() {
+      // $("#selected_branch").hide()
+      // $("#select_branch_search").attr("value", "").show().focus()
+    })
+  },
+  
+  branch_selection_handler: function(selection) {
+    console.log("selected branch", selection)
+    document.location = "/" + selection.html()
+  },
+  
+  observe_hotkeys: function() {
+    $(document).bind('keyup', 'b', function() {
+      $("#select_branch").click()
+    })
+    
+    $(document).bind('keyup', 'h', function() {
+      document.location.href = $("#home a").attr("href")
+    })
+    
+    $(document).bind('keyup', 'c', function() {
+      // TODO implement "click on sha to enter sha" feature :)
+      // $("#sha").click()
+    })
   },
   
   observe_window_resize: function() {
@@ -37,7 +114,7 @@ var RepoManager = {
   
   fit_window: function() {
     // TODO test other browsers.. 20 used here is specific to Mac Firefox
-    var height      = window.innerHeight - parseInt($("#header").css("height")) - 20
+    var height      = window.innerHeight - parseInt($("#header").css("height")) - 18
     var diffs_width = window.innerWidth  - parseInt($("#commits").css("width")) - RepoManager.fit_window_width_offset()
     
     $("#commits").css({ height: height })
@@ -69,7 +146,7 @@ var RepoManager = {
       $("#diffs .content").html(data)
     })
     document.location.hash = sha
-    $("#sha").html(sha.substring(0,18) + "...")
+    $("#sha").html(sha)
   },
   
   select_branch: function() {
