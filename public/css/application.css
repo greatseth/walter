@@ -39,16 +39,21 @@ p {
   padding: .75em;
   padding-bottom: .5em;
   
-  background: #222;
+  background: #000;
   border-top: 1px solid #777;
+  border-bottom: 1px solid #666;
 }
 
 #header,
 #header a {
   color: #fff;
+  text-shadow: 0 1px 0 #5d99d1;
 }
 
-#header .sep {color: #5d99d1}
+#header .sep {
+  color: #5d99d1;
+  text-shadow: none;
+}
 
 #logo {
   font-size: 2em;
@@ -73,7 +78,10 @@ p {
 }
 
 #credit,
-#credit a {color: #999}
+#credit a {
+  color: #999;
+  text-shadow: none;
+}
 
 #header:hover #credit,
 #header:hover #credit a {color: #999}
@@ -93,14 +101,21 @@ p {
 
 #hide_merges {display: none;}
 
-#spinner {
+#header .spinner {
   position: fixed;
   top: 1em; right: .75em;
 }
 
 #content {
-  
+  position: relative;
 }
+
+#content .spinner {
+  position: absolute;
+  top: 50%; left: 50%;
+  margin: -12px 0 0 -12px;
+}
+
 
 #commits {
   width: 30%;
@@ -125,6 +140,7 @@ p {
   border-bottom: 1px solid #444;
   padding: .6em 0 .25em .5em;
   line-height: 1em;
+  text-shadow: 0px 1px 2px #333;
 }
 
 #commits li:hover {
@@ -141,9 +157,10 @@ p {
   background: #5d99d1 url(/images/bg-commit-selected.gif) 0 0 repeat-x;
 }
 
-#commits li a {
+#commits a {
   display: block;
   color: #fff;
+  outline: none;
 }
 
 #commits li .img {
@@ -154,15 +171,8 @@ p {
   height: 24px;
 }
 
-#commits .merge {
-  background-image: url(/images/HARDWARE.png);
-  background-repeat: no-repeat;
-  background-position: 1em .2em;
-}
-
-#commits .merge .img {
-  display: none
-}
+/*#commits .merge .img {visibility: hidden}*/
+/*#commits .merge:hover .img {visibility: visible}*/
 
 #commits li .message {
   font-size: .8em;
@@ -204,6 +214,8 @@ p {
   font-size: .8em;
   overflow-x: auto;
   overflow-y: auto;
+  background: #fff;
+  position: relative;
 }
 
 #diffs.hiding_overflow {
@@ -213,6 +225,7 @@ p {
 
 #diffs .diff {
   white-space: pre;
+  background: #fff;
 }
 
 #diffs .diff_container,
@@ -223,14 +236,19 @@ p {
 #diffs .overview,
 #diffs .overview span {
   color: #fff;
+  text-shadow: 0px 1px 2px #333;
   background: #666;
   font-weight: bold;
 }
 
-#diffs .overview {margin-top: 1em}
-#diffs .overview:first-child,
-#diffs .overview + .overview,
-#diffs .overview + .overview .overview {margin-top: 0}
+#diffs .diff_container.overview {
+  border-top: 2em solid #000;
+  border-bottom: 1px solid #444;
+}
+#diffs .diff_container.overview + .diff_container.overview,
+#diffs .diff_container.overview:first-child {
+  border-top: none;
+}
 
 #diffs .add    {background: #ECF8D2}
 #diffs .remove {background: #FAEBEB}
