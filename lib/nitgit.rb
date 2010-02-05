@@ -26,8 +26,8 @@ end
 require "grit"
 require "haml"
 
-NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
-$: << NITGIT_LIB_DIR
+NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? NITGIT_LIB_DIR
+$: << NITGIT_LIB_DIR unless $:.include? NITGIT_LIB_DIR
 
 require "albino"
 require "nitgit/string_extensions"
