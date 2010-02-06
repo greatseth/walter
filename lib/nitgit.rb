@@ -68,12 +68,21 @@ class NitGit < Sinatra::Base
     redirect "/#{@selected_branch}"
   end
   
+  # Not sure I like the xhr forking in here..
   get "/:head/?" do |head|
-    @project_name    = File.basename(self.class.pwd)
-    @selected_branch = head.gsub(/--/, "/")
-    @branches        = repo.branches.map { |b| b.name }
-    @commits         = commits_for_page
-    haml :index
+    unless request.xhr?
+      @project_name    = File.basename(self.class.pwd)
+      @selected_branch = head.gsub(/--/, "/")
+      @branches        = repo.branches.map { |b| b.name }
+    end
+    
+    @commits = commits_for_page
+    
+    if request.xhr?
+      haml :commits, :layout => false
+    else
+      haml :index
+    end
   end
   
   get "/diffs/:sha" do |sha|

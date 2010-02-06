@@ -199,6 +199,10 @@ p {
   margin-top: -.2em;
 }
 
+#commits .page-end {
+  border-bottom-color: #fff;
+}
+
 #commits .merge .message {
   margin-left: 32px;
   color: #fff;
@@ -213,6 +217,19 @@ p {
 
 #commits .merge:hover * {
   color: inherit;
+}
+
+#more a {
+  display: block;
+  background: #fff;
+  color: #444;
+  text-transform: uppercase;
+  font-size: .8em;
+  padding: 1em;
+}
+
+#more a:hover {
+  color: #000;
 }
 
 #home {text-decoration: none}
