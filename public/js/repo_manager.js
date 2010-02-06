@@ -15,18 +15,6 @@ $.browser = {
 }
 
 var RepoManager = {
-  get_commits: function(page) {
-    $.ajax({
-      async: false,
-      url: document.location.pathname,
-      data: { page: page },
-      success: function(commits) {
-        $("#commits ol li:last").addClass("page-end")
-        $("#commits ol").append(commits)
-      }
-    })
-  },
-  
   onload: function() {
     // observe commit selection
     $("#commits li").live("click", function() {
@@ -75,25 +63,19 @@ var RepoManager = {
       document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
     })
     
-    // Now do general app onload-ery..
     RepoManager.fit_window()
     RepoManager.observe_window_resize()
-    RepoManager.observe_branch_selection()
-    // RepoManager.observe_hotkeys()
   },
   
-  observe_hotkeys: function() {
-    $(document).bind('keyup', 'b', function() {
-      $("#select_branch").click()
-    })
-    
-    $(document).bind('keyup', 'h', function() {
-      document.location.href = $("#home a").attr("href")
-    })
-    
-    $(document).bind('keyup', 'c', function() {
-      // TODO implement "click on sha to enter sha" feature :)
-      // $("#sha").click()
+  get_commits: function(page) {
+    $.ajax({
+      async: false,
+      url: document.location.pathname,
+      data: { page: page },
+      success: function(commits) {
+        $("#commits ol li:last").addClass("page-end")
+        $("#commits ol").append(commits)
+      }
     })
   },
   
