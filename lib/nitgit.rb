@@ -22,13 +22,12 @@ module Sinatra
   end
 end
 
-# TODO these will obviously be deps when we're a bona fide gem
 require "grit"
 require "haml"
-require "json"
+# require "json"
 
-NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__)))
-$: << NITGIT_LIB_DIR
+NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? NITGIT_LIB_DIR
+$: << NITGIT_LIB_DIR unless $:.include? NITGIT_LIB_DIR
 
 require "albino"
 require "nitgit/string_extensions"
@@ -69,17 +68,27 @@ class NitGit < Sinatra::Base
     redirect "/#{@selected_branch}"
   end
   
+  # Not sure I like the xhr forking in here..
   get "/:head/?" do |head|
-    @project_name    = File.basename(self.class.pwd)
-    @selected_branch = head.gsub(/--/, "/")
-    @commits         = commits_for_page
-    haml :index
+    unless request.xhr?
+      @project_name    = File.basename(self.class.pwd)
+      @selected_branch = head.gsub(/--/, "/")
+      @branches        = repo.branches.map { |b| b.name }
+    end
+    
+    @commits = commits_for_page
+    
+    if request.xhr?
+      haml :commits, :layout => false
+    else
+      haml :index
+    end
   end
   
   get "/diffs/:sha" do |sha|
-    @sha      = sha
-    @commit   = repo.commit(@sha)
-    @branches = repo.branches.map { |b| b.name }
+    @sha    = sha
+    @commit = repo.commit(@sha)
+    etag @sha
     haml :diffs, :layout => false
   end
   

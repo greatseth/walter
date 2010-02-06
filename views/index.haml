@@ -1,11 +1,8 @@
-%ol#commits
-  -@commits.each do |c|
-    %li{ :id => "commit_#{c.id}", :class => "ui-helper-clearfix #{'merge' if c.merge?}" }
-      .img
-        %a{ :href => "mailto:#{c.author}" }
-          %img{ :src => c.author.gravatar_url(24) }
-      %a{ :href => "##{c.id}", :class => "message" }
-        = c.message_html
+#commits
+  %ol
+  #more
+    %a{ :href => "?page=#{@page+1}" }
+      more
 
 #diffs
   %img.spinner{ :src => "/images/spinner-black-on-white.gif", :style => "display:none" }

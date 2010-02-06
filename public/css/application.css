@@ -192,6 +192,10 @@ p {
   margin-top: -.2em;
 }
 
+#commits .page-end {
+  border-bottom-color: #ccc;
+}
+
 #commits .merge .message {
   margin-left: 32px;
   color: #fff;
@@ -207,6 +211,24 @@ p {
 #commits .merge:hover * {
   color: inherit;
 }
+
+#more a {
+  display: block;
+  background: #ccc;
+  color: #444;
+  text-transform: uppercase;
+  font-size: .8em;
+  padding: 1em;
+  text-shadow: none;
+}
+
+#more a:hover {
+  color: #eee;
+  background: #888;
+  text-shadow: 1px 1px 1px #000;
+}
+
+#home {text-decoration: none}
 
 .diff_loading,
 #diffs {

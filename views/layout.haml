@@ -4,18 +4,13 @@
     %title NitGit - Git History Browser
     %link{ :rel => "stylesheet", :type => "text/css",
            :href => "/jquery-ui-1.7.2.custom/css/ui-lightness/jquery-ui-1.7.2.custom.css" }
-    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/colorful.css" }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/application.css" }
-    -#%link{ :rel => "stylesheet", :type => "text/css", :href => "/css/autoSuggest.css" }
     %script{ :src => "/jquery-ui-1.7.2.custom/js/jquery-1.3.2.min.js" }
-    %script{ :src => "/jquery-ui-1.7.2.custom/js/jquery-ui-1.7.2.custom.min.js" }
     %script{ :src => "/js/jquery.hotkeys-0.7.9.min.js" }
     %script{ :src => "/js/pxem.jQuery.js" }
-    -#%script{ :src => "/js/jquery.autoSuggest.js" }
-    -#%script{ :src => "/js/jquery.autoSuggest.minified.js" }
-    -#%script{ :src => "/js/prettify.js" }
     %script{ :src => "/js/repo_manager.js" }
     :javascript
+      PAGE = #{@page}
       RepoManager.branches = #{@branches}
   %body
     #header.ui-helper-clearfix
@@ -25,8 +20,12 @@
             = @project_name
         .sep /
         #select_branch
-          %span{ :id => "selected_branch" }
-            = @selected_branch
+          %select
+            - @repo.heads.each do |h|
+              %option{ :value => h.name, :selected => (@selected_branch == h.name) }
+                = h.name
+          -# %span{ :id => "selected_branch" }
+          -#  = @selected_branch
           %input{ :type => "text", :id => "select_branch_search" }
         .sep /
         #sha
