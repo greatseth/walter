@@ -54,10 +54,8 @@ var RepoManager = {
     // load initial commit
     if (document.location.hash) {
       var sha = document.location.hash.substring(1)
-      console.log("loading requested commit", sha)
       $("#commit_" + sha).click()
     } else {
-      console.log("loading first commit")
       $("#commits li").eq(0).click()
     }
     
