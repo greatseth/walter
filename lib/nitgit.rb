@@ -77,9 +77,9 @@ class NitGit < Sinatra::Base
   end
   
   get "/diffs/:sha" do |sha|
-    @sha      = sha
-    @commit   = repo.commit(@sha)
-    @branches = repo.branches.map { |b| b.name }
+    @sha    = sha
+    @commit = repo.commit(@sha)
+    etag @sha
     haml :diffs, :layout => false
   end
   
