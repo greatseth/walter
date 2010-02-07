@@ -23,7 +23,7 @@
         #select_branch
           %select
             - @repo.heads.each do |h|
-              %option{ :value => h.name, :selected => (@selected_branch == h.name) }
+              %option{ :value => h.name, :selected => (@repo.head.name == h.name) }
                 = h.name
           -# %span{ :id => "selected_branch" }
           -#  = @selected_branch
