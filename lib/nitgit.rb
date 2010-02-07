@@ -60,6 +60,7 @@ class NitGit < Sinatra::Base
     setup_page # need for layout, for JS
     setup_project
     @branches = repo.branches.map { |b| b.name }
+    @selected_branch = params[:head].gsub("--", "/")
     haml :index
   end
   
