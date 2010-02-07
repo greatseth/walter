@@ -69,20 +69,25 @@ var RepoManager = {
   },
   
   observe_hotkeys: function() {
-    $(document).bind('keydown', 'b', function() {
-      // console.log("b")
-      $("#select_branch select").focus().click()
-    })
+    handlers = {
+      /*
+      b: function() {
+        $("#select_branch select option:first").click()
+      },
+      c: function() {
+        $("#sha").click()
+      },
+      */
+      h: function() {
+        // $("#home a").click() doesn't work, sadly, 
+        // but perhaps understandably..
+        document.location.href = $("#home a").attr("href")
+      }
+    }
     
-    $(document).bind('keydown', 'h', function() {
-      // console.log("h")
-      document.location.href = $("#home a").attr("href")
+    $.each(handlers, function(key,handler) {
+      $(document).bind('keydown', key, handler)
     })
-    
-    // $(document).bind('keyup', 'c', function() {
-    //   console.log("c")
-    //   $("#sha").click()
-    // })
   },
   
   get_commits: function(page) {
