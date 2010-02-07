@@ -37,7 +37,7 @@ var RepoManager = {
     })
     
     // fetch first page of commits
-    RepoManager.get_commits(PAGE)
+    RepoManager.get_commits()
     
     // load initial commit
     if (document.location.hash) {
@@ -68,6 +68,8 @@ var RepoManager = {
   },
   
   get_commits: function(page) {
+    if (!page) var page = PAGE
+    
     $.ajax({
       async: false,
       url: document.location.pathname,
