@@ -53,7 +53,7 @@ class NitGit < Sinatra::Base
   
   get "/" do
     setup_project
-    redirect "/#{@project}/#{repo.head.name.gsub("/", "--")}"
+    redirect "/#{@project}/heads/#{repo.head.name.gsub("/", "--")}"
   end
   
   get "/:repo/heads/:head/?" do
