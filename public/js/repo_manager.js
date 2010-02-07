@@ -27,7 +27,7 @@ var RepoManager = {
       c.addClass("selected")
 
       var sha = /[^_]+$/.exec(c.attr("id"))[0]
-      $.get("/diffs/" + sha, function(data) {
+      $.get("/" + PROJ + "/diffs/" + sha, function(data) {
         $("#diffs .spinner").hide()
         $("#diffs").addClass("hiding_overflow")
         $("#diffs .content").html(data)
@@ -60,7 +60,7 @@ var RepoManager = {
     $("#select_branch select").change(function() {
       var select = $(this)
       var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
-      document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
+      document.location.href = "/" + PROJ + "/heads/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
     })
     
     RepoManager.fit_window()
@@ -72,7 +72,7 @@ var RepoManager = {
     
     $.ajax({
       async: false,
-      url: document.location.pathname,
+      url: "/" + PROJ + "/commits",
       data: { page: page },
       success: function(commits) {
         $("#commits ol li:last").addClass("page-end")
