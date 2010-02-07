@@ -69,15 +69,18 @@ var RepoManager = {
   },
   
   observe_hotkeys: function() {
-    // $(document).bind('keyup', 'b', function() {
-    //   $("#select_branch").click()
-    // })
+    $(document).bind('keydown', 'b', function() {
+      // console.log("b")
+      $("#select_branch select").focus().click()
+    })
     
-    $(document).bind('keyup', 'h', function() {
-      $("#home a").click()
+    $(document).bind('keydown', 'h', function() {
+      // console.log("h")
+      document.location.href = $("#home a").attr("href")
     })
     
     // $(document).bind('keyup', 'c', function() {
+    //   console.log("c")
     //   $("#sha").click()
     // })
   },
