@@ -10,6 +10,7 @@
     %script{ :src => "/js/pxem.jQuery.js" }
     %script{ :src => "/js/repo_manager.js" }
     :javascript
+      PROJ = '#{@project}'
       PAGE = #{@page}
       RepoManager.branches = #{@branches}
   %body
@@ -17,7 +18,7 @@
       #logo
         #home
           %a{ :href => "/" }
-            = @project_name
+            = @project
         .sep /
         #select_branch
           %select

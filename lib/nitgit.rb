@@ -34,6 +34,8 @@ require "nitgit/string_extensions"
 require "nitgit/grit_extensions"
 
 class NitGit < Sinatra::Base
+  ### CONFIG, SETUP, ETC
+  
   def logger; Vegas::Runner.logger; end
   
   configure :development do
@@ -47,14 +49,45 @@ class NitGit < Sinatra::Base
   enable :static, :logging, :dump_errors
   enable :show_exceptions if development?
   
-  def repo
-    logger.info "attempting to load repo at #{self.class.pwd.inspect}"
-    @repo ||= Grit::Repo.new(self.class.pwd)
+  ### ROUTES
+  
+  get "/" do
+    setup_project
+    redirect "/#{@project}/heads/#{repo.head.name.gsub("/", "--")}"
   end
   
-  def commits_for_page(page = @page)
-    page = setup_page unless page
-    commits = repo.commits(@selected_branch, commits_per_page, ((page - 1) * commits_per_page))
+  get "/:repo/heads/:head/?" do
+    setup_page # need for layout, for JS
+    setup_project
+    @branches = repo.branches.map { |b| b.name }
+    haml :index
+  end
+  
+  get "/:repo/commits/?" do
+    setup_page
+    @commits = commits
+    haml :commits, :layout => false
+  end
+  
+  get "/:repo/diffs/:sha/?" do
+    @sha    = params[:sha]
+    @commit = repo.commit(@sha)
+    etag @sha
+    haml :diffs, :layout => false
+  end
+  
+  ### HELPERS
+  
+  def repo
+    @repo ||= begin
+      logger.info "attempting to load repo at #{self.class.pwd.inspect}"
+      Grit::Repo.new(self.class.pwd)
+    end
+  end
+  
+  def commits
+    setup_page unless @page
+    commits = repo.commits(repo.head.name, commits_per_page, ((@page - 1) * commits_per_page))
     commits.reject! { |c| c.merge? } if @hide_merges
     commits
   end
@@ -63,36 +96,11 @@ class NitGit < Sinatra::Base
     20
   end
   
-  get "/" do
-    @selected_branch = repo.head.name
-    redirect "/#{@selected_branch}"
-  end
-  
-  # Not sure I like the xhr forking in here..
-  get "/:head/?" do |head|
-    unless request.xhr?
-      @project_name    = File.basename(self.class.pwd)
-      @selected_branch = head.gsub(/--/, "/")
-      @branches        = repo.branches.map { |b| b.name }
-    end
-    
-    @commits = commits_for_page
-    
-    if request.xhr?
-      haml :commits, :layout => false
-    else
-      haml :index
-    end
-  end
-  
-  get "/diffs/:sha" do |sha|
-    @sha    = sha
-    @commit = repo.commit(@sha)
-    etag @sha
-    haml :diffs, :layout => false
-  end
-  
   def setup_page
     @page = params[:page] ? params[:page].to_i : 1
+  end
+  
+  def setup_project
+    @project = File.basename(self.class.pwd)
   end
 end

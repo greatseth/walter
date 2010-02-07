@@ -15,18 +15,6 @@ $.browser = {
 }
 
 var RepoManager = {
-  get_commits: function(page) {
-    $.ajax({
-      async: false,
-      url: document.location.pathname,
-      data: { page: page },
-      success: function(commits) {
-        $("#commits ol li:last").addClass("page-end")
-        $("#commits ol").append(commits)
-      }
-    })
-  },
-  
   onload: function() {
     // observe commit selection
     $("#commits li").live("click", function() {
@@ -39,7 +27,7 @@ var RepoManager = {
       c.addClass("selected")
 
       var sha = /[^_]+$/.exec(c.attr("id"))[0]
-      $.get("/diffs/" + sha, function(data) {
+      $.get("/" + PROJ + "/diffs/" + sha, function(data) {
         $("#diffs .spinner").hide()
         $("#diffs").addClass("hiding_overflow")
         $("#diffs .content").html(data)
@@ -49,15 +37,13 @@ var RepoManager = {
     })
     
     // fetch first page of commits
-    RepoManager.get_commits(PAGE)
+    RepoManager.get_commits()
     
     // load initial commit
     if (document.location.hash) {
       var sha = document.location.hash.substring(1)
-      console.log("loading requested commit", sha)
       $("#commit_" + sha).click()
     } else {
-      console.log("loading first commit")
       $("#commits li").eq(0).click()
     }
     
@@ -74,10 +60,9 @@ var RepoManager = {
     $("#select_branch select").change(function() {
       var select = $(this)
       var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
-      document.location.href = "/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
+      document.location.href = "/" + PROJ + "/heads/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
     })
     
-    // Now do general app onload-ery..
     RepoManager.fit_window()
     RepoManager.observe_window_resize()
     RepoManager.observe_hotkeys()
@@ -95,6 +80,20 @@ var RepoManager = {
     // $(document).bind('keyup', 'c', function() {
     //   $("#sha").click()
     // })
+  },
+  
+  get_commits: function(page) {
+    if (!page) var page = PAGE
+    
+    $.ajax({
+      async: false,
+      url: "/" + PROJ + "/commits",
+      data: { page: page },
+      success: function(commits) {
+        $("#commits ol li:last").addClass("page-end")
+        $("#commits ol").append(commits)
+      }
+    })
   },
   
   observe_window_resize: function() {
