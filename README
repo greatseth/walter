@@ -1,7 +1,25 @@
-= NitGit
+= Walter
 
-A cross-platform, graphical interface to Git repositories.
+Walter is a web app you run locally. It's a "git browser" of sorts. Think GitNub or GitX but with more awesome included.
+
+It's early, yet, so I'm not going to fret examples and promises too much.. so, stay tuned!
+
+== Basic Usage
+
+  $ cd /some/project
+  $ walt
+  
+LOST fans will the alternative startup command:
+
+  $ cd /some/project
+  $ waaaaaaaaalt
+
+== Requirements
+
+I recommend Ruby 1.9.1, but try whatever you got, and let me know..
 
 == Contributors
 
 - Seth Thomas Rasmussen http://greatseth.com
+
+If you would like to contribute, please fork the project(http://github.com/greatseth/walter) on GitHub, make your changes in a topic branch, and send me a pull request. Please.
