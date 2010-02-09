@@ -11,6 +11,7 @@ module Sinatra
 end
 
 require "grit"
+Grit.debug = true
 require "haml"
 
 WALTER_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? WALTER_LIB_DIR
@@ -51,9 +52,10 @@ class Walter < Sinatra::Base
     haml :index
   end
   
-  get "/:repo/commits/?" do
+  get "/:repo/heads/:head/commits/?" do
     setup_page
-    @commits = commits
+    @selected_branch = params[:head].gsub("--", "/")
+    @commits = commits @selected_branch
     haml :commits, :layout => false
   end
   
@@ -73,9 +75,9 @@ class Walter < Sinatra::Base
     end
   end
   
-  def commits
+  def commits(head = repo.head.name)
     setup_page unless @page
-    commits = repo.commits(repo.head.name, commits_per_page, ((@page - 1) * commits_per_page))
+    commits = repo.commits(head, commits_per_page, ((@page - 1) * commits_per_page))
     commits.reject! { |c| c.merge? } if @hide_merges
     commits
   end
