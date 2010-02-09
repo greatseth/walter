@@ -58,9 +58,7 @@ var RepoManager = {
     
     // observe branch selection
     $("#select_branch select").change(function() {
-      var select = $(this)
-      var selected_branch = select.attr("options")[select.attr("selectedIndex")].value
-      document.location.href = "/" + PROJ + "/heads/" + encodeURIComponent(selected_branch.replace(/\//g, '--'))
+      document.location.href = "/" + PROJ + "/heads/" + RepoManager.selected_branch(true)
     })
     
     RepoManager.fit_window()
@@ -70,6 +68,14 @@ var RepoManager = {
   
   load_first_commit: function() {
     $("#commits li").eq(0).click()
+  },
+  
+  selected_branch: function(escaped) {
+    var select = $("#select_branch select")
+    var branch_name = select.attr("options")[select.attr("selectedIndex")].value
+    
+    if (escaped) branch_name = encodeURIComponent(branch_name.replace(/\//g, '--'))
+    return branch_name
   },
   
   observe_hotkeys: function() {
@@ -110,7 +116,7 @@ var RepoManager = {
     
     $.ajax({
       async: false,
-      url: "/" + PROJ + "/commits",
+      url: "/" + PROJ + "/heads/" + RepoManager.selected_branch(true) + "/commits",
       data: params,
       success: function(commits) {
         $("#commits ol li:last").addClass("page-end")
