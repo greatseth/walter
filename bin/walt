@@ -1,2 +1,11 @@
 #!/usr/bin/env ruby
-load 'nit'
+
+# ARGV.concat %w( -L )
+
+require "rubygems"
+require "vegas"
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "walter"))
+
+WALTER_VEGAS_RUNNER = Vegas::Runner.new Walter, "walter",
+  :pwd   => Dir.pwd,
+  :start => (ENV["START"] != "false")
