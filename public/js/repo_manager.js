@@ -88,6 +88,8 @@ var RepoManager = {
     $.each(handlers, function(key,handler) {
       $(document).bind('keydown', key, handler)
     })
+    
+    $("input[type=text]").add("textarea").keydown(function(e) { e.stopPropagation() })
   },
   
   get_commits: function(page) {
