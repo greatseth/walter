@@ -14,8 +14,11 @@
       PAGE = #{@page}
       RepoManager.branches = #{@branches}
   %body
+    .modal
+      %h2 whatchanged
+      %input{ :type => "text" }
     #header.ui-helper-clearfix
-      #logo
+      #logo.heading
         #home
           %a{ :href => "/" }
             = @project
