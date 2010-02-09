@@ -17,10 +17,10 @@ class Echoe
   end
 end
 
-Echoe.new "nitgit" do |p|
+Echoe.new "walter" do |p|
   p.author = "Seth Thomas Rasmussen"
   p.email  = "sethrasmussen@gmail.com"
-  p.url    = "http://github.com/greatseth/nitgit"
+  p.url    = "http://github.com/greatseth/walter"
   
   p.description = p.summary = "A cross-platform, graphical interface to Git repositories."
   
