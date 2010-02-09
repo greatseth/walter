@@ -28,6 +28,9 @@
             - @repo.heads.each do |h|
               %option{ :value => h.name, :selected => ("selected" if @selected_branch == h.name) }
                 = h.name
+          %span#whatchanged{ :style => "display:none" }
+            whatchanged
+            %span#whatchanged_close x
         .sep /
         #sha
       %p#credit

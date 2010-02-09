@@ -84,9 +84,38 @@ var RepoManager = {
         document.location.href = $("#home a").attr("href")
       },
       w: function() {
-        var glob = prompt("Find commits that changed:")
-        RepoManager.get_commits({ whatchanged: glob, new_list: true })
-        RepoManager.load_first_commit()
+        $(".modal").show()
+        $(".modal input[type=text]").attr("value", "")
+        $(".modal input[type=text]").focus().keypress(function(e) {
+          switch(e.keyCode) {
+            case 13: // enter
+              $(".modal").hide()
+              
+              /*
+              $("#select_branch select").hide()
+              $("#whatchanged").show()
+              
+              $("#whatchanged_close").click(function() {
+                $("#whatchanged").hide()
+                $("#select_branch select").show()
+                Repo.get_commits({ new_list: true })
+              })
+              */
+              var glob = $(".modal input[type=text]").attr("value")
+              
+              // $("#sha").html(glob)
+              
+              RepoManager.get_commits({ whatchanged: glob, new_list: true })
+              RepoManager.load_first_commit()
+              break
+            case 27: // esc
+              $(".modal").hide()
+              $(".modal input[type=text]").attr("value", "")
+              $(document).focus()
+              break
+            default:
+          }
+        })
       }
     }
     
