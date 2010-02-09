@@ -76,17 +76,7 @@ var RepoManager = {
   
   observe_hotkeys: function() {
     handlers = {
-      /*
-      b: function() {
-        $("#select_branch select option:first").click()
-      },
-      c: function() {
-        $("#sha").click()
-      },
-      */
       h: function() {
-        // $("#home a").click() doesn't work, sadly, 
-        // but perhaps understandably..
         document.location.href = $("#home a").attr("href")
       }
     }
