@@ -14,12 +14,12 @@ require "grit"
 # Grit.debug = true
 require "haml"
 
-NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? NITGIT_LIB_DIR
-$: << NITGIT_LIB_DIR unless $:.include? NITGIT_LIB_DIR
+WALTER_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? WALTER_LIB_DIR
+$: << WALTER_LIB_DIR unless $:.include? WALTER_LIB_DIR
 
 require "albino"
-require "nitgit/string_extensions"
-require "nitgit/grit_extensions"
+require "walter/string_extensions"
+require "walter/grit_extensions"
 
 class NitGit < Sinatra::Base
   ### CONFIG, SETUP, ETC
@@ -31,7 +31,7 @@ class NitGit < Sinatra::Base
   end
   
   set :environment => :development,
-      :root        => File.join(NITGIT_LIB_DIR, ".."),
+      :root        => File.join(WALTER_LIB_DIR, ".."),
       :server      => "thin"
   
   enable :static, :logging, :dump_errors
