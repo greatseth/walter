@@ -25,9 +25,6 @@
             - @repo.heads.each do |h|
               %option{ :value => h.name, :selected => ("selected" if @selected_branch == h.name) }
                 = h.name
-          -# %span{ :id => "selected_branch" }
-          -#  = @selected_branch
-          %input{ :type => "text", :id => "select_branch_search" }
         .sep /
         #sha
       %p#credit
