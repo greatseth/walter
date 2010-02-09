@@ -2,21 +2,9 @@ require "rack/reloader"
 require "sinatra"
 
 module Sinatra
-  # class Rack::Reloader
-  #   def safe_stat(file)
-  #     $stderr.puts "trying safe stat for #{file.inspect}"
-  #     return unless file
-  #     stat = ::File.stat(file)
-  #     return file, stat if stat.file?
-  #   rescue Object, Errno::ENOENT, Errno::ENOTDIR => e
-  #     $stderr.puts "safe stat failed for #{e.inspect}"
-  #     @cache.delete(file) and false
-  #   end
-  # end
-  
   class Reloader < Rack::Reloader
     def safe_load(file, mtime, stderr = $stderr)
-      ::Sinatra::Application.reset! if file == Sinatra::Application.app_file
+      Sinatra::Application.reset! if file == Sinatra::Application.app_file
       super
     end
   end
@@ -24,7 +12,6 @@ end
 
 require "grit"
 require "haml"
-# require "json"
 
 NITGIT_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? NITGIT_LIB_DIR
 $: << NITGIT_LIB_DIR unless $:.include? NITGIT_LIB_DIR
