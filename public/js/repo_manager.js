@@ -44,14 +44,14 @@ var RepoManager = {
       var sha = document.location.hash.substring(1)
       $("#commit_" + sha).click()
     } else {
-      $("#commits li").eq(0).click()
+      RepoManager.load_first_commit()
     }
     
     // observe link to next page of commits
     $("#more a").click(function() {
       var current_page = PAGE
       var new_page     = PAGE + 1
-      RepoManager.get_commits(new_page)
+      RepoManager.get_commits({ page: new_page })
       PAGE += 1
       return false
     })
@@ -68,6 +68,10 @@ var RepoManager = {
     RepoManager.observe_hotkeys()
   },
   
+  load_first_commit: function() {
+    $("#commits li").eq(0).click()
+  },
+  
   observe_hotkeys: function() {
     handlers = {
       /*
@@ -82,6 +86,11 @@ var RepoManager = {
         // $("#home a").click() doesn't work, sadly, 
         // but perhaps understandably..
         document.location.href = $("#home a").attr("href")
+      },
+      w: function() {
+        var glob = prompt("Find commits that changed:")
+        RepoManager.get_commits({ whatchanged: glob, new_list: true })
+        RepoManager.load_first_commit()
       }
     }
     
@@ -90,16 +99,25 @@ var RepoManager = {
     })
   },
   
-  get_commits: function(page) {
-    if (!page) var page = PAGE
+  get_commits: function(params) {
+    if (!params) var params = {}
+    if (!params.page) params.page = PAGE
+    
+    var new_list = params.new_list
+    delete params.new_list
     
     $.ajax({
       async: false,
       url: "/" + PROJ + "/commits",
-      data: { page: page },
+      data: params,
       success: function(commits) {
         $("#commits ol li:last").addClass("page-end")
-        $("#commits ol").append(commits)
+        
+        if (new_list) {
+          $("#commits ol").html(commits)
+        } else {
+          $("#commits ol").append(commits)
+        }
       }
     })
   },

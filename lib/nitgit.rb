@@ -23,6 +23,7 @@ module Sinatra
 end
 
 require "grit"
+# Grit.debug = true
 require "haml"
 # require "json"
 
@@ -88,7 +89,13 @@ class NitGit < Sinatra::Base
   
   def commits
     setup_page unless @page
-    commits = repo.commits(repo.head.name, commits_per_page, ((@page - 1) * commits_per_page))
+    
+    commits = if params[:whatchanged]
+      repo.whatchanged(params[:whatchanged])
+    else
+      repo.commits(repo.head.name, commits_per_page, ((@page - 1) * commits_per_page))
+    end
+    
     commits.reject! { |c| c.merge? } if @hide_merges
     commits
   end
