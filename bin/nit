@@ -4,8 +4,8 @@
 
 require "rubygems"
 require "vegas"
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "nitgit"))
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "walter"))
 
-NITGIT_VEGAS_RUNNER = Vegas::Runner.new NitGit, "Nitgit - Git Commit Browser",
+NITGIT_VEGAS_RUNNER = Vegas::Runner.new NitGit, "walter",
   :pwd   => Dir.pwd,
   :start => (ENV["START"] != "false")
