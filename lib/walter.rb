@@ -21,7 +21,7 @@ require "albino"
 require "walter/string_extensions"
 require "walter/grit_extensions"
 
-class NitGit < Sinatra::Base
+class Walter < Sinatra::Base
   ### CONFIG, SETUP, ETC
   
   def logger; Vegas::Runner.logger; end
