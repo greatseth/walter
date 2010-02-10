@@ -1,7 +1,7 @@
 CHANGELOG
 LICENSE
 Manifest
-README
+README.markdown
 Rakefile
 bin/waaaaaaaaalt
 bin/walt
@@ -11,7 +11,6 @@ lib/settings.rb
 lib/walter.rb
 lib/walter/grit_extensions.rb
 lib/walter/string_extensions.rb
-nitgit.gemspec
 public/colorful.css
 public/css/application.css
 public/css/colorful.css
@@ -333,3 +332,4 @@ views/commits.haml
 views/diffs.haml
 views/index.haml
 views/layout.haml
+walter.gemspec
