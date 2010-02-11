@@ -9,10 +9,11 @@
     %script{ :src => "/js/jquery.hotkeys-0.7.9.min.js" }
     %script{ :src => "/js/pxem.jQuery.js" }
     %script{ :src => "/js/repo_manager.js" }
+    -# TODO probably want to get some to_json going on soon
     :javascript
       PROJ = '#{@project}'
       PAGE = #{@page}
-      RepoManager.branches = #{@branches}
+      RepoManager.branches = [#{@branches.map { |x| "'#{x}'" } * ','}]
   %body
     #header.ui-helper-clearfix
       #logo
