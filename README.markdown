@@ -40,3 +40,9 @@ You will definitely need [Pygments](http://pygments.org) for syntax highlighting
 - Seth Thomas Rasmussen [http://greatseth.com](http://greatseth.com)
 
 If you would like to contribute, please [fork the project](http://github.com/greatseth/walter), make your changes in a topic branch, and send me a pull request!
+
+## Thanks
+
+Big ups to the [GitHub](http://github.com) guys for Albino and [Grit](http://github.com/mojombo/grit), two indispensable pieces of this puzzle here. Thanks to [Caged](http://github.com/caged) for [GitNub](http://github.com/caged/gitnub), a big part of the initial inspiration to make a similar tool.
+
+And thank YOU for checking it out! :D
