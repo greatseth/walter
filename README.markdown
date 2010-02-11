@@ -8,10 +8,10 @@ It's early, yet, so I'm not going to fret examples and promises too much.. so, s
 
 [Get the code.](http://github.com/greatseth/walter)
 
-  $ cd /wheres/walter
-  $ rake install
-  $ cd /some/project
-  $ walt
+    $ cd /wheres/walter
+    $ rake install
+    $ cd /some/project
+    $ walt
   
 If your estranged, only son was taken from you by a creepy, bearded man, use the `waaaaaaaaalt` alias command.
 
