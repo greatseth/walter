@@ -30,7 +30,6 @@ class String
     [:diff_overview_line?, :diff_add_line?, :diff_remove_line?].any? { |x| send(x) }
   end
   
-  # TODO this is exclusively a view helper.. diff special line sort of is too
   def diff_container_class
     if    diff_overview_line? then "overview"
     elsif diff_remove_line?   then "remove"

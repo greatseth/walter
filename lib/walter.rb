@@ -66,7 +66,7 @@ class Walter < Sinatra::Base
     haml :diffs, :layout => false
   end
   
-  ### HELPERS
+  ### APP HELPERS (not view helpers)
   
   def repo
     @repo ||= begin
