@@ -27,7 +27,7 @@ var RepoManager = {
       c.addClass("selected")
 
       var sha = /[^_]+$/.exec(c.attr("id"))[0]
-      $.get("/" + PROJ + "/diffs/" + sha, function(data) {
+      $.get(RepoManager.url("diffs", sha), function(data) {
         $("#diffs .spinner").hide()
         $("#diffs").addClass("hiding_overflow")
         $("#diffs .content").html(data)
@@ -49,21 +49,27 @@ var RepoManager = {
     
     // observe link to next page of commits
     $("#more a").click(function() {
-      var current_page = PAGE
-      var new_page     = PAGE + 1
+      var current_page = RepoManager.page
+      var new_page     = RepoManager.page + 1
       RepoManager.get_commits(new_page)
-      PAGE += 1
+      RepoManager.page += 1
       return false
     })
     
     // observe branch selection
     $("#select_branch select").change(function() {
-      document.location.href = "/" + PROJ + "/heads/" + RepoManager.selected_branch(true)
+      document.location.href = "/" + RepoManager.project + "/heads/" + RepoManager.selected_branch(true)
     })
     
     RepoManager.fit_window()
     RepoManager.observe_window_resize()
     RepoManager.observe_hotkeys()
+  },
+  
+  url: function() {
+    var args = $.makeArray(arguments)
+    args.unshift(RepoManager.project)
+    return "/" + args.join("/")
   },
   
   selected_branch: function(escaped) {
@@ -89,11 +95,11 @@ var RepoManager = {
   },
   
   get_commits: function(page) {
-    if (!page) var page = PAGE
+    if (!page) var page = RepoManager.page
     
     $.ajax({
       async: false,
-      url: "/" + PROJ + "/heads/" + RepoManager.selected_branch(true) + "/commits",
+      url: RepoManager.url("heads", RepoManager.selected_branch(true), "commits"),
       data: { page: page },
       success: function(commits) {
         $("#commits ol li:last").addClass("page-end")
