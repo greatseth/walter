@@ -134,7 +134,7 @@ var RepoManager = {
   
   get_commits: function(params) {
     if (!params) var params = {}
-    if (!params.page) params.page = PAGE
+    if (!params.page) params.page = RepoManager.current_page
     
     var new_list = params.new_list
     delete params.new_list
