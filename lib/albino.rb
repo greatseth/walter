@@ -1,46 +1,6 @@
 ##
 # Wrapper for the Pygments command line tool, pygmentize.
-#
-# Pygments: http://pygments.org/
-#
-# Assumes pygmentize is in the path.  If not, set its location
-# with Albino.bin = '/path/to/pygmentize'
-#
-# Use like so:
-#
-#   @syntaxer = Albino.new('/some/file.rb', :ruby)
-#   puts @syntaxer.colorize
-#
-# This'll print out an HTMLized, Ruby-highlighted version
-# of '/some/file.rb'.
-#
-# To use another formatter, pass it as the third argument:
-#
-#   @syntaxer = Albino.new('/some/file.rb', :ruby, :bbcode)
-#   puts @syntaxer.colorize
-#
-# You can also use the #colorize class method:
-#
-#   puts Albino.colorize('/some/file.rb', :ruby)
-#
-# Another also: you get a #to_s, for somewhat nicer use in Rails views.
-#
-#   ... helper file ...
-#   def highlight(text)
-#     Albino.new(text, :ruby)
-#   end
-#
-#   ... view file ...
-#   <%= highlight text %>
-#
-# The default lexer is 'text'.  You need to specify a lexer yourself;
-# because we are using STDIN there is no auto-detect.
-#
-# To see all lexers and formatters available, run `pygmentize -L`.
-#
-# Chris Wanstrath // chris@ozmm.org 
-#         GitHub // http://github.com
-#
+# Taken from http://github.com/github/albino
 require 'open4'
 
 class Albino

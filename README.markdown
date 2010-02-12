@@ -8,10 +8,10 @@ It's early, yet, so I'm not going to fret examples and promises too much.. so, s
 
 [Get the code.](http://github.com/greatseth/walter)
 
-  $ cd /wheres/walter
-  $ rake install
-  $ cd /some/project
-  $ walt
+    $ cd /wheres/walter
+    $ rake install
+    $ cd /some/project
+    $ walt
   
 If your estranged, only son was taken from you by a creepy, bearded man, use the `waaaaaaaaalt` alias command.
 
@@ -40,3 +40,11 @@ You will definitely need [Pygments](http://pygments.org) for syntax highlighting
 - Seth Thomas Rasmussen [http://greatseth.com](http://greatseth.com)
 
 If you would like to contribute, please [fork the project](http://github.com/greatseth/walter), make your changes in a topic branch, and send me a pull request!
+
+Note that, while developing, you can run `./bin/walt` from within the Walter source code to run it against itself instead of using `rake install` and running `walt` against some other project, if you'd like.
+
+## Thanks
+
+Big ups to the [GitHub](http://github.com) guys for Albino and [Grit](http://github.com/mojombo/grit), two indispensable pieces of this puzzle here. Thanks to [Caged](http://github.com/caged) for [GitNub](http://github.com/caged/gitnub), a big part of the initial inspiration to make a similar tool.
+
+And thank YOU for checking it out! :D
