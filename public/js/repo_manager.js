@@ -49,10 +49,10 @@ var RepoManager = {
     
     // observe link to next page of commits
     $("#more a").click(function() {
-      var current_page = RepoManager.page
-      var new_page     = RepoManager.page + 1
+      var current_page = RepoManager.current_page
+      var new_page     = RepoManager.current_page + 1
       RepoManager.get_commits(new_page)
-      RepoManager.page += 1
+      RepoManager.current_page += 1
       return false
     })
     
