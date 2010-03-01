@@ -39,3 +39,9 @@ task :log do
   load File.dirname(__FILE__) + "/bin/nit"
   system "tail -f #{NITGIT_VEGAS_RUNNER.log_file}"
 end
+
+desc "Restart ./bin/walt"
+task :restart do
+  system "./bin/walt -k"
+  system "./bin/walt"
+end
