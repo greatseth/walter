@@ -51,15 +51,18 @@ var RepoManager = {
     $("#more a").click(function() {
       var current_page = RepoManager.current_page
       var new_page     = RepoManager.current_page + 1
-      RepoManager.get_commits(new_page)
+      RepoManager.get_commits({ page: new_page })
       RepoManager.current_page += 1
       return false
     })
     
     // observe branch selection
-    $("#select_branch select").change(function() {
-      document.location.href = "/" + RepoManager.project + "/heads/" + RepoManager.selected_branch(true)
-    })
+    var branch_select = $("#select_branch select")
+    if (branch_select) {
+      branch_select.change(function() {
+        document.location.href = RepoManager.head_url()
+      })
+    }
     
     RepoManager.fit_window()
     RepoManager.observe_window_resize()
@@ -76,43 +79,39 @@ var RepoManager = {
     return "/" + args.join("/")
   },
   
-  selected_branch: function(escaped) {
-    var select = $("#select_branch select")
-    var branch_name = select.attr("options")[select.attr("selectedIndex")].value
+  head_url: function() {
+    var args = $.makeArray(arguments)
+    var head = RepoManager.selected_branch(true)
+    if (!head) head = "*"
     
-    if (escaped) branch_name = encodeURIComponent(branch_name.replace(/\//g, '--'))
-    return branch_name
+    args.unshift("heads", head)
+    return RepoManager.url.apply(null, args)
+  },
+  
+  selected_branch: function(escaped) {
+    var branch_select = $("#select_branch select")
+    if (branch_select.length == 0) {
+      return
+    } else {
+      var branch_name = branch_select.attr("options")[branch_select.attr("selectedIndex")].value
+      if (escaped) branch_name = encodeURIComponent(branch_name.replace(/\//g, '--'))
+      return branch_name
+    }
   },
   
   observe_hotkeys: function() {
     handlers = {
-      h: function() {
+      h: function(e) {
         document.location.href = $("#home a").attr("href")
       },
-      w: function() {
+      w: function(e) {
         $(".modal").show()
-        $(".modal input[type=text]").attr("value", "")
-        $(".modal input[type=text]").focus().keypress(function(e) {
+        $(".modal input[type=text]").val("").focus().keypress(function(e) {
           switch(e.keyCode) {
             case 13: // enter
               $(".modal").hide()
-              
-              /*
-              $("#select_branch select").hide()
-              $("#whatchanged").show()
-              
-              $("#whatchanged_close").click(function() {
-                $("#whatchanged").hide()
-                $("#select_branch select").show()
-                Repo.get_commits({ new_list: true })
-              })
-              */
               var glob = $(".modal input[type=text]").attr("value")
-              
-              // $("#sha").html(glob)
-              
-              RepoManager.get_commits({ whatchanged: glob, new_list: true })
-              RepoManager.load_first_commit()
+              document.location.href = RepoManager.url("whatchanged", glob)
               break
             case 27: // esc
               $(".modal").hide()
@@ -126,7 +125,7 @@ var RepoManager = {
     }
     
     $.each(handlers, function(key,handler) {
-      $(document).bind('keydown', key, handler)
+      $(document).bind('keypress', key, handler)
     })
     
     $("input[type=text]").add("textarea").keydown(function(e) { e.stopPropagation() })
@@ -139,9 +138,14 @@ var RepoManager = {
     var new_list = params.new_list
     delete params.new_list
     
+    if (RepoManager.mode) {
+      params.mode = RepoManager.mode
+      if (params.mode == "whatchanged") params.glob = $.trim($("#sha").text())
+    }
+    
     $.ajax({
       async: false,
-      url: RepoManager.url("heads", RepoManager.selected_branch(true), "commits"),
+      url: RepoManager.head_url("commits"),
       data: params,
       success: function(commits) {
         $("#commits ol li:last").addClass("page-end")

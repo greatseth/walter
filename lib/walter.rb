@@ -5,7 +5,13 @@ module Sinatra
   class Reloader < Rack::Reloader
     def safe_load(file, mtime, stderr = $stderr)
       Sinatra::Application.reset! if file == Sinatra::Application.app_file
-      super
+      begin
+        super
+      # This seems to be an issue on 1.8.7. I don't recommend using 1.8.7 
+      # at any rate, but perhaps this helps..
+      rescue Errno::ETIMEDOUT, Errno::EIO => e
+        Vegas.logger.warn "ignoring #{e}, raised trying to stat #{file}"
+      end
     end
   end
 end
@@ -49,21 +55,37 @@ class Walter < Sinatra::Base
     setup_project
     @branches = repo.branches.map { |b| b.name }
     @selected_branch = params[:head].gsub("--", "/")
+    
     haml :index
   end
   
   get "/:repo/heads/:head/commits/?" do
     setup_page
+    
     @selected_branch = params[:head].gsub("--", "/")
-    @commits = commits @selected_branch
+    @commits         = commits @selected_branch
+    
     haml :commits, :layout => false
   end
   
   get "/:repo/diffs/:sha/?" do
     @sha    = params[:sha]
     @commit = repo.commit(@sha)
+    
     etag @sha
     haml :diffs, :layout => false
+  end
+  
+  get "/:repo/whatchanged/*/?" do
+    @mode = 'whatchanged'
+    
+    setup_page
+    setup_project
+    
+    @branches = repo.branches.map { |b| b.name }
+    @glob     = params[:splat].join("/")
+    
+    haml :index
   end
   
   ### APP HELPERS (not view helpers)
@@ -75,11 +97,14 @@ class Walter < Sinatra::Base
     end
   end
   
-  def commits(head = repo.head.name)
+  def commits(head)
+    raise ArgumentError, "null head, need a head, head head head!" unless head
     setup_page unless @page
     
-    commits = if params[:whatchanged]
-      repo.whatchanged(params[:whatchanged])
+    commits = case params[:mode]
+    when "whatchanged"
+      # TODO pagination i guess?
+      repo.whatchanged(params[:glob])
     else
       repo.commits(head, commits_per_page, ((@page - 1) * commits_per_page))
     end
