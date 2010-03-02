@@ -58,7 +58,7 @@ var RepoManager = {
     
     // observe branch selection
     var branch_select = $("#select_branch select")
-    if (branch_select) {
+    if (branch_select.length > 0) {
       branch_select.change(function() {
         document.location.href = RepoManager.head_url()
       })
