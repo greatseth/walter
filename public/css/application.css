@@ -35,6 +35,33 @@ h2, h2 a,
 
 .heading a {text-decoration: none}
 
+#hotkey_help {
+  position: fixed;
+  top: 100px; left: 50%;
+  width: 400px; margin-left: -200px;
+  z-index: 999999999;
+  
+  background: #000;
+  opacity: 80%;
+  color: #fff;
+  padding: 1em;
+}
+
+#hotkey_help dt {
+  float: left;
+  clear: left;
+  width: 1.4em;
+  text-align: right;
+  margin-right: .4em;
+  font-weight: bold;
+  color: #5d99d1;
+}
+
+#hotkey_help dt,
+#hotkey_help dd {
+  line-height: 1em;
+}
+
 #header {
   background: #000;
   border-top: 1px solid #777;
