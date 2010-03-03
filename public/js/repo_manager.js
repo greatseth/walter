@@ -104,18 +104,21 @@ var RepoManager = {
       h: function(e) {
         document.location.href = $("#home a").attr("href")
       },
+      "/": function(e) {
+        $("#hotkey_link").click()
+      },
       w: function(e) {
-        $(".modal").show()
-        $(".modal input[type=text]").val("").focus().keypress(function(e) {
+        $("#whatchanged_link").click()
+        $("#whatchanged input[type=text]").val("").focus().keypress(function(e) {
           switch(e.keyCode) {
             case 13: // enter
-              $(".modal").hide()
-              var glob = $(".modal input[type=text]").attr("value")
+              $(document).trigger('close.facebox')
+              var glob = $("#whatchanged input[type=text]").val()
               document.location.href = RepoManager.url("whatchanged", glob)
               break
             case 27: // esc
-              $(".modal").hide()
-              $(".modal input[type=text]").attr("value", "")
+              $(document).trigger('close.facebox')
+              $("#whatchanged input[type=text]").val("")
               $(document).focus()
               break
             default:
@@ -181,4 +184,7 @@ var RepoManager = {
   }
 }
 
-$(RepoManager.onload)
+$(function() {
+  $('a[rel*=facebox]').facebox()
+  RepoManager.onload()
+})

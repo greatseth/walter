@@ -7,6 +7,7 @@
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/colorful.css" }
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/application.css" }
     %script{ :src => "/js/jquery-1.4.2.min.js" }
+    %script{ :src => "/facebox/facebox.js" }
     %script{ :src => "/js/jquery.hotkeys.js" }
     %script{ :src => "/js/pxem.jQuery.js" }
     %script{ :src => "/js/repo_manager.js" }
@@ -17,7 +18,18 @@
       RepoManager.current_page = #{@page}
       RepoManager.branches     = [#{@branches.map { |x| "'#{x}'" } * ','}]
   %body
-    .modal
+    %a#hotkey_link{ :href => "#hotkey_help", :rel => "facebox" }
+    #hotkey_help
+      %h2 hotkeys
+      %table
+        - Walter.hotkeys.each do |key,desc|
+          %tr
+            %td.key
+              = key
+            %td
+              = desc
+    %a#whatchanged_link{ :href => "#whatchanged", :rel => "facebox" }
+    #whatchanged
       %h2 whatchanged
       %input{ :type => "text" }
     -# TODO this has gotten messy.. naming is poor, abuse of containers for 

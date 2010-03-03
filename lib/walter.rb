@@ -1,29 +1,16 @@
-require "rack/reloader"
 require "sinatra"
-
-module Sinatra
-  class Reloader < Rack::Reloader
-    def safe_load(file, mtime, stderr = $stderr)
-      Sinatra::Application.reset! if file == Sinatra::Application.app_file
-      begin
-        super
-      # This seems to be an issue on 1.8.7. I don't recommend using 1.8.7 
-      # at any rate, but perhaps this helps..
-      rescue Errno::ETIMEDOUT, Errno::EIO => e
-        Vegas.logger.warn "ignoring #{e}, raised trying to stat #{file}"
-      end
-    end
-  end
-end
 
 require "grit"
 Grit.debug = true
+
 require "haml"
 
 WALTER_LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__))) unless defined? WALTER_LIB_DIR
 $: << WALTER_LIB_DIR unless $:.include? WALTER_LIB_DIR
 
 require "albino"
+
+require "walter/sinatra_reloader"
 require "walter/string_extensions"
 require "walter/grit_extensions"
 
@@ -32,16 +19,26 @@ class Walter < Sinatra::Base
   
   def logger; Vegas::Runner.logger; end
   
-  configure :development do
-    use Sinatra::Reloader
-  end
-  
   set :environment => :development,
-      :root        => File.join(WALTER_LIB_DIR, ".."),
+      :root        => File.expand_path(File.join(WALTER_LIB_DIR, "..")),
       :server      => "thin"
   
   enable :static, :logging, :dump_errors
   enable :show_exceptions if development?
+  
+  configure :development do
+    require "walter/sinatra_reloader"
+    use Sinatra::Reloader
+    
+    # require "sass"
+    # require "sass/plugin/rack"
+    # use Sass::Plugin::Rack
+    # Sass::Plugin.options.merge! \
+    #   :css_location   => File.join(Walter.public, "css"),
+    #   :cache_location => File.join(Walter.root, "tmp", "cache", "sass"),
+    #   :never_update   => !production?,
+    #   :full_exception => !production?
+  end
   
   ### ROUTES
   
@@ -88,7 +85,17 @@ class Walter < Sinatra::Base
     haml :index
   end
   
+  get "/css/application.css" do
+    content_type "text/css"
+    sass :application
+  end
+  
   ### APP HELPERS (not view helpers)
+  
+  set :hotkeys,
+    "h" => "go home.",
+    "w" => "bring up `git whatchanged` search. type and hit enter.",
+    "/" => "show this help window."
   
   def repo
     @repo ||= begin
