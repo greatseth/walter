@@ -52,7 +52,7 @@ h2 {
     text-decoration: none; }
 
 #hotkey_help {
-/*  display: none;*/
+  display: none;
   position: fixed;
   top: 100px;
   left: 50%;
