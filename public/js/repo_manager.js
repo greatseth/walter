@@ -109,11 +109,12 @@ var RepoManager = {
       },
       w: function(e) {
         $("#whatchanged_link").click()
-        $("#whatchanged input[type=text]").val("").focus().keypress(function(e) {
+        $("#whatchanged input[type=text]").eq(1).val("").focus().keypress(function(e) {
           switch(e.keyCode) {
             case 13: // enter
-              $(document).trigger('close.facebox')
-              var glob = $("#whatchanged input[type=text]").val()
+              // TODO have to use eq(1) here because of how facebox works,
+              // need to fix this
+              var glob = $("#whatchanged input[type=text]").eq(1).val()
               document.location.href = RepoManager.url("whatchanged", glob)
               break
             case 27: // esc
