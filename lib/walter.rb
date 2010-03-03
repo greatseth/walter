@@ -85,10 +85,10 @@ class Walter < Sinatra::Base
     haml :index
   end
   
-  get "/css/application.css" do
-    content_type "text/css"
-    sass :application
-  end
+ # get "/css/application.css" do
+ #   content_type "text/css"
+ #   sass :application
+ # end
   
   ### APP HELPERS (not view helpers)
   
