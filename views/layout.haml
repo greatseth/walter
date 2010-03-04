@@ -49,8 +49,10 @@
                 %option{ :value => h.name, :selected => ("selected" if @selected_branch == h.name) }
                   = h.name
         .sep /
+        - if @glob
+          = @glob.gsub("/", %{<div class="sep">/</div>})
         #sha
-          = @glob
+          
       %p#credit
         Walter by
         %a{ :href => "http://greatseth.com" }

@@ -66,24 +66,24 @@ h2 {
   #hotkey_help .key {
     width: 1.4em;
     text-align: right;
-    padding-right: .4em;
+    margin-right: .4em;
     font-weight: bold;
     color: #5d99d1; }
-  #hotkey_help td {
-    padding-bottom: .2em;
-    line-height: 1em;
-  }
+
 #header {
   background: #000;
   border-top: 1px solid #777;
   border-bottom: 1px solid #666;
   padding: .5em; }
   #header div {
-    float: left; }
+    display: inline; }
   #header .sep {
     color: #5d99d1;
-    text-shadow: none;
-    margin: 0 .2em; }
+    text-shadow: none; }
+
+#sha_at {
+  color: #5d99d1;
+  margin-right: .4em; }
 
 #logo {
   font-size: 1.4em; }

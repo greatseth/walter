@@ -33,7 +33,7 @@ var RepoManager = {
         $("#diffs .content").html(data)
       })
       document.location.hash = sha
-      $("#sha").html(sha)
+      $("#sha").html('<span id="sha_at">@</span>' + sha)
     })
     
     // fetch first page of commits

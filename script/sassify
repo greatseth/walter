@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+# based on http://www.pragmaticautomation.com/cgi-bin/pragauto.cgi/Monitor/StakingOutFileChanges.rdoc
+
+require 'logger'
+LOG = Logger.new(File.join(File.dirname(__FILE__), "sassify.log"))
+
+start_dir = Dir.pwd
+
+root_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+css_dir  = File.join(root_dir, "public", "css")
+sass_dir = File.join(css_dir, "sass")
+
+LOG.info "monitoring #{sass_dir}"
+
+files = Dir["#{sass_dir}/**/*.sass"].inject({}) { |memo,f| memo[f] = File.mtime(f); memo }
+
+LOG.info "found sass files:\n#{files.keys.sort * "\n"}\n"
+
+
+loop do
+  sleep 1
+  
+  changed_file, last_changed = files.find do |file, last_changed|
+    File.mtime(file) > last_changed
+  end
+  
+  if changed_file
+    css_file = File.join(css_dir, "#{File.basename changed_file, 'sass'}css")
+    LOG.info "changed #{changed_file}"
+    files[changed_file] = File.mtime(changed_file)
+    command = %{sass #{changed_file} #{css_file}}
+    LOG.info command
+    system command
+    LOG.info "updated #{changed_file} => #{css_file}"
+  end
+end
