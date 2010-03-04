@@ -1,8 +1,6 @@
 # Walter
 
-Walter is a web app you run locally. It's a "git browser" of sorts. Think GitNub or GitX but with more awesome included. Eventually.. ;)
-
-It's early, yet, so I'm not going to fret examples and promises too much.. so, stay tuned!
+Walter is a web app you run locally. It's a "git browser" of sorts. Think GitNub or GitX but with more awesome! ;)
 
 ## Basic Usage
 
@@ -12,22 +10,20 @@ It's early, yet, so I'm not going to fret examples and promises too much.. so, s
     $ rake install
     $ cd /some/project
     $ walt
-  
+
+If you would prefer not to install the Ruby gem, you can run `./bin/walt` from within the Walter source code to run Walter against itself.
+
 If your estranged, only son was taken from you by a creepy, bearded man, use the `waaaaaaaaalt` alias command.
 
 Once started, you should see a new browser window open with `/some/project` loaded, listing the first page of commits from the current head.
 
 From there you can page through past commits, switch to other local branches, and of course view the diff for any given commit.
 
-## Future Usage
+### Hotkeys
 
-Some things I intend to add:
+Walter supports some hotkey shortcuts for certain actions. Some actions are currently accessible via hotkey *only*, e.g. whatchanged search(press "w" for that, by the way).
 
-  * `git whatchanged` support
-  * `git log -S` support
-  * UI Themes aka CSS FTW
-
-I have more ideas, but I'm not sure I feel comfortable committing them to paper right now. I'd love to hear yours!
+Press "/" to see a list of available hotkeys.
 
 ## Requirements
 
@@ -39,12 +35,4 @@ You will definitely need [Pygments](http://pygments.org) for syntax highlighting
 
 - Seth Thomas Rasmussen [http://greatseth.com](http://greatseth.com)
 
-If you would like to contribute, please [fork the project](http://github.com/greatseth/walter), make your changes in a topic branch, and send me a pull request!
-
-Note that, while developing, you can run `./bin/walt` from within the Walter source code to run it against itself instead of using `rake install` and running `walt` against some other project, if you'd like.
-
-## Thanks
-
-Big ups to the [GitHub](http://github.com) guys for Albino and [Grit](http://github.com/mojombo/grit), two indispensable pieces of this puzzle here. Thanks to [Caged](http://github.com/caged) for [GitNub](http://github.com/caged/gitnub), a big part of the initial inspiration to make a similar tool.
-
-And thank YOU for checking it out! :D
+If you would like to contribute, please [fork the project](http://github.com/greatseth/walter), make your changes in a topic branch, and send me a pull request! If you don't use GitHub, you can email me or whatever, too.
