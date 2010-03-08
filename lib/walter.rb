@@ -29,15 +29,6 @@ class Walter < Sinatra::Base
   configure :development do
     require "walter/sinatra_reloader"
     use Sinatra::Reloader
-    
-    # require "sass"
-    # require "sass/plugin/rack"
-    # use Sass::Plugin::Rack
-    # Sass::Plugin.options.merge! \
-    #   :css_location   => File.join(Walter.public, "css"),
-    #   :cache_location => File.join(Walter.root, "tmp", "cache", "sass"),
-    #   :never_update   => !production?,
-    #   :full_exception => !production?
   end
   
   ### ROUTES
@@ -84,11 +75,6 @@ class Walter < Sinatra::Base
     
     haml :index
   end
-  
- # get "/css/application.css" do
- #   content_type "text/css"
- #   sass :application
- # end
   
   ### APP HELPERS (not view helpers)
   
